@@ -1,0 +1,153 @@
+---
+const traditional = [
+  { text: 'Responds in 2–6 hours (if at all)', detail: 'Leads go cold in 5 minutes' },
+  { text: '$6,000–$12,000/month per sales rep', detail: 'Salary, benefits, management overhead' },
+  { text: 'Sleeps, gets sick, quits, demands raises', detail: 'Your pipeline stops when they stop' },
+  { text: 'Forgets follow-ups under pressure', detail: '87% of leads never get a 2nd touch' },
+  { text: 'Crashes under volume spikes', detail: 'Can\'t scale without proportional cost' },
+  { text: 'No data, no feedback loop', detail: 'You can\'t improve what isn\'t measured' },
+];
+
+const leverage = [
+  { text: 'Responds in <30 seconds, every time', detail: 'First mover wins 78% of deals' },
+  { text: 'Fraction of cost, infinite throughput', detail: 'One system handles unlimited leads' },
+  { text: 'Works 24/7/365 without exception', detail: 'Your pipeline never sleeps' },
+  { text: 'Perfect follow-up cadence, always', detail: 'Every lead gets every touchpoint' },
+  { text: 'Infinite scale, zero marginal cost', detail: 'Handle 10x volume overnight' },
+  { text: 'Full analytics, A/B testing, iteration', detail: 'Compound improvements every week' },
+];
+---
+
+<section id="comparison" class="py-32 bg-[#0A0A0A] relative overflow-hidden">
+  <!-- Background accent -->
+  <div class="absolute inset-0 opacity-[0.03]"
+    style="background: radial-gradient(ellipse at 50% 50%, #00FF41 0%, transparent 60%);">
+  </div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-6">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <div class="section-label mb-6">The Problem</div>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-balance">
+        The Losing Game<br/>
+        <span class="text-white/40">Every Operator Plays</span>
+      </h2>
+      <p class="text-white/50 mt-5 text-lg max-w-xl mx-auto">
+        While you sleep, your competitors' AI systems are booking their next 10 clients.
+      </p>
+    </div>
+
+    <!-- Comparison grid -->
+    <div class="grid md:grid-cols-2 gap-4 lg:gap-6">
+
+      <!-- Traditional Staff -->
+      <div class="relative rounded-sm border border-red-500/15 bg-red-950/10 p-8 md:p-10 overflow-hidden">
+        <!-- Header -->
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-10 h-10 rounded-sm bg-red-500/10 border border-red-500/20 flex items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff4444" stroke-width="2.5">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M15 9l-6 6M9 9l6 6"/>
+            </svg>
+          </div>
+          <div>
+            <div class="text-xs text-red-400/70 font-mono uppercase tracking-widest mb-0.5">Status: Bleeding</div>
+            <h3 class="text-xl font-black text-white">Traditional Sales Staff</h3>
+          </div>
+        </div>
+
+        <!-- Items -->
+        <ul class="space-y-4">
+          {traditional.map((item) => (
+            <li class="flex items-start gap-3 group">
+              <div class="w-5 h-5 rounded-full bg-red-500/15 border border-red-500/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#ff4444" stroke-width="3.5">
+                  <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+              </div>
+              <div>
+                <div class="text-white/80 font-semibold text-sm leading-snug">{item.text}</div>
+                <div class="text-white/30 text-xs mt-0.5 leading-snug">{item.detail}</div>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <!-- Cost badge -->
+        <div class="mt-8 pt-6 border-t border-red-500/10">
+          <div class="flex items-center justify-between">
+            <span class="text-red-400/60 text-sm font-medium">Monthly Cost</span>
+            <span class="text-red-400 font-black text-lg">$6,000–$12,000 <span class="text-red-400/50 text-sm font-normal">/ rep</span></span>
+          </div>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-red-400/60 text-sm font-medium">Lead Coverage</span>
+            <span class="text-red-400 font-black text-lg">~60% <span class="text-red-400/50 text-sm font-normal">(the rest decay)</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leverage Systems -->
+      <div class="relative rounded-sm border border-[#00FF41]/20 bg-[#00FF41]/[0.04] p-8 md:p-10 overflow-hidden">
+        <!-- Glow effect -->
+        <div class="absolute top-0 right-0 w-48 h-48 opacity-10 pointer-events-none"
+          style="background: radial-gradient(circle, #00FF41 0%, transparent 70%);">
+        </div>
+
+        <!-- Header -->
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-10 h-10 rounded-sm bg-[#00FF41]/10 border border-[#00FF41]/25 flex items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00FF41" stroke-width="2.5">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="text-xs text-[#00FF41]/70 font-mono uppercase tracking-widest mb-0.5">Status: Extracting</div>
+            <h3 class="text-xl font-black text-white">Leverage Systems AI</h3>
+          </div>
+        </div>
+
+        <!-- Items -->
+        <ul class="space-y-4">
+          {leverage.map((item) => (
+            <li class="flex items-start gap-3 group">
+              <div class="w-5 h-5 rounded-full bg-[#00FF41]/15 border border-[#00FF41]/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00FF41" stroke-width="3.5">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+              </div>
+              <div>
+                <div class="text-white font-semibold text-sm leading-snug">{item.text}</div>
+                <div class="text-white/40 text-xs mt-0.5 leading-snug">{item.detail}</div>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <!-- Cost badge -->
+        <div class="mt-8 pt-6 border-t border-[#00FF41]/10">
+          <div class="flex items-center justify-between">
+            <span class="text-[#00FF41]/60 text-sm font-medium">Monthly Investment</span>
+            <span class="text-[#00FF41] font-black text-lg">Fixed <span class="text-[#00FF41]/50 text-sm font-normal">(not per-seat)</span></span>
+          </div>
+          <div class="flex items-center justify-between mt-2">
+            <span class="text-[#00FF41]/60 text-sm font-medium">Lead Coverage</span>
+            <span class="text-[#00FF41] font-black text-lg">100% <span class="text-[#00FF41]/50 text-sm font-normal">(zero decay)</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom CTA pull -->
+    <div class="text-center mt-14">
+      <p class="text-white/40 text-base mb-6">
+        Every month you wait is another <span class="text-white font-semibold">$25,000+</span> your pipeline doesn't capture.
+      </p>
+      <a href="#diagnostic" class="neon-btn inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold rounded-sm">
+        Calculate My Revenue Leak
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

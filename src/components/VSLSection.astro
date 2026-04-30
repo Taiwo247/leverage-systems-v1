@@ -1,0 +1,158 @@
+---
+---
+
+<section id="vsl" class="py-32 bg-[#0A0A0A] relative overflow-hidden">
+  <!-- Subtle bg texture -->
+  <div class="absolute inset-0 opacity-[0.02]"
+    style="background-image: repeating-linear-gradient(45deg, #ffffff 0, #ffffff 1px, transparent 0, transparent 50%); background-size: 20px 20px;">
+  </div>
+
+  <div class="relative z-10 max-w-5xl mx-auto px-6">
+
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <div class="section-label mb-6">Main Event</div>
+      <h2 class="text-4xl md:text-5xl font-black tracking-tight mb-4">
+        See Exactly Where Your<br/><span class="text-[#00FF41]">Revenue Is Leaking</span>
+      </h2>
+      <p class="text-white/50 text-lg max-w-xl mx-auto">
+        A 5-minute breakdown of the exact workflow we install — and the compounding ROI it produces in 30 days.
+      </p>
+    </div>
+
+    <!-- Video container -->
+    <div
+      id="vsl-container"
+      class="relative rounded-sm overflow-hidden border border-white/10 cursor-pointer group"
+      style="aspect-ratio: 16/9; background: linear-gradient(135deg, #0e0e0e 0%, #141414 50%, #0e0e0e 100%);"
+    >
+      <!-- Cinematic letter-box bars -->
+      <div class="absolute top-0 left-0 right-0 h-[8%] bg-black z-20 pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-[8%] bg-black z-20 pointer-events-none"></div>
+
+      <!-- Background visual: abstract waveform -->
+      <div class="absolute inset-0 flex items-center justify-center opacity-10">
+        <svg viewBox="0 0 800 200" class="w-full" preserveAspectRatio="none">
+          <path d="M0,100 Q50,30 100,100 Q150,170 200,100 Q250,30 300,100 Q350,170 400,100 Q450,30 500,100 Q550,170 600,100 Q650,30 700,100 Q750,170 800,100"
+            fill="none" stroke="#00FF41" stroke-width="2"/>
+          <path d="M0,100 Q60,50 120,100 Q180,150 240,100 Q300,50 360,100 Q420,150 480,100 Q540,50 600,100 Q660,150 720,100 Q780,50 800,100"
+            fill="none" stroke="#00FF41" stroke-width="1" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <!-- Thumbnail overlay with gradient -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 z-10"></div>
+
+      <!-- Duration badge -->
+      <div class="absolute top-6 left-6 z-30 flex items-center gap-2">
+        <div class="px-3 py-1 bg-black/70 border border-white/15 rounded-sm text-xs text-white/60 font-mono backdrop-blur-sm">
+          RUNTIME: 4:47
+        </div>
+        <div class="px-3 py-1 bg-[#00FF41]/20 border border-[#00FF41]/30 rounded-sm text-xs text-[#00FF41] font-mono backdrop-blur-sm">
+          ● CASE STUDY
+        </div>
+      </div>
+
+      <!-- Chapter indicator -->
+      <div class="absolute top-6 right-6 z-30 hidden md:flex flex-col gap-1.5">
+        {['Revenue Leak Diagnosis', 'System Architecture', 'Live Results', 'ROI Projection'].map((ch, i) => (
+          <div class={`flex items-center gap-2 px-3 py-1 rounded-sm backdrop-blur-sm text-xs font-mono ${i === 0 ? 'bg-[#00FF41]/20 text-[#00FF41] border border-[#00FF41]/30' : 'bg-black/50 text-white/30 border border-white/10'}`}>
+            <span class="tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+            <span>{ch}</span>
+          </div>
+        ))}
+      </div>
+
+      <!-- Center play button -->
+      <div class="absolute inset-0 z-20 flex items-center justify-center">
+        <div id="play-btn" class="group/play relative flex items-center justify-center">
+          <!-- Pulse rings -->
+          <div class="absolute w-32 h-32 rounded-full border border-[#00FF41]/20 animate-ping" style="animation-duration: 2s;"></div>
+          <div class="absolute w-24 h-24 rounded-full border border-[#00FF41]/30 animate-ping" style="animation-duration: 2s; animation-delay: 0.4s;"></div>
+
+          <!-- Button -->
+          <button
+            class="relative w-20 h-20 rounded-full bg-[#00FF41] flex items-center justify-center transition-all duration-200 group-hover/play:scale-110"
+            style="box-shadow: 0 0 40px rgba(0,255,65,0.5), 0 0 80px rgba(0,255,65,0.2);"
+            aria-label="Play video"
+            onclick="document.getElementById('vsl-placeholder').style.display='flex'"
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="black" style="margin-left: 3px;">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom meta bar -->
+      <div class="absolute bottom-8 left-6 right-6 z-30 flex items-end justify-between">
+        <div>
+          <div class="text-white font-bold text-lg leading-tight">The Revenue Leak Breakdown</div>
+          <div class="text-white/40 text-sm mt-0.5">How we recovered $340K for a coaching operator in 90 days</div>
+        </div>
+        <div class="hidden sm:flex items-center gap-2 text-white/40 text-xs font-mono">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+          2.1k views
+        </div>
+      </div>
+
+      <!-- Progress bar (decorative) -->
+      <div class="absolute bottom-[8%] left-0 right-0 z-30 h-0.5 bg-white/10">
+        <div class="h-full w-0 bg-[#00FF41] group-hover:w-1/12 transition-all duration-500"></div>
+      </div>
+    </div>
+
+    <!-- Below video: transcript teaser + CTA -->
+    <div class="mt-8 grid md:grid-cols-2 gap-4">
+      <div class="bg-[#111] border border-white/5 rounded-sm p-6">
+        <div class="text-xs text-[#00FF41]/60 font-mono uppercase tracking-widest mb-3">Key Insight</div>
+        <blockquote class="text-white/70 text-base italic leading-relaxed border-l-2 border-[#00FF41]/40 pl-4">
+          "The average high-ticket operator loses 63% of their ad leads to decay within the first 5 minutes of non-response. That's not a sales problem — it's an infrastructure problem."
+        </blockquote>
+        <div class="text-white/30 text-xs mt-3 font-mono">— From the case study, 2:14</div>
+      </div>
+
+      <div class="bg-[#111] border border-white/5 rounded-sm p-6 flex flex-col justify-between">
+        <div>
+          <div class="text-xs text-white/30 font-mono uppercase tracking-widest mb-3">Next Step</div>
+          <p class="text-white font-semibold text-base mb-1">Ready to run your own audit?</p>
+          <p class="text-white/40 text-sm">Takes 3 minutes. We'll calculate your exact monthly leak.</p>
+        </div>
+        <a href="#diagnostic" class="neon-btn mt-6 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold rounded-sm">
+          Start Revenue Audit
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Placeholder modal (shown when play is clicked) -->
+  <div
+    id="vsl-placeholder"
+    class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-6"
+    onclick="this.style.display='none'"
+  >
+    <div class="max-w-lg text-center">
+      <div class="w-20 h-20 rounded-full bg-[#00FF41]/15 border border-[#00FF41]/30 flex items-center justify-center mx-auto mb-6">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00FF41" stroke-width="2">
+          <polygon points="23 7 16 12 23 17 23 7"/>
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+        </svg>
+      </div>
+      <h3 class="text-2xl font-black mb-3">Video Coming Soon</h3>
+      <p class="text-white/50 text-base mb-6">The VSL is in production. In the meantime, book a live walkthrough below.</p>
+      <button
+        onclick="event.stopPropagation(); this.closest('#vsl-placeholder').style.display='none'; document.getElementById('diagnostic').scrollIntoView({behavior:'smooth'})"
+        class="neon-btn px-8 py-4 font-bold text-base rounded-sm"
+      >
+        Book Live Demo Instead
+      </button>
+      <p class="text-white/20 text-xs mt-4 font-mono">Click anywhere to close</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-green: #00FF41;
+  --color-brand-green-dim: rgba(0, 255, 65, 0.15);
+  --color-charcoal: #0A0A0A;
+  --color-surface: #111111;
+  --color-surface-2: #161616;
+  --color-border: rgba(255, 255, 255, 0.08);
+
+  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: #0A0A0A;
+    color: #ffffff;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(0, 255, 65, 0.3);
+    color: #fff;
+  }
+}
+
+@layer components {
+  .neon-btn {
+    position: relative;
+    background: #00FF41;
+    color: #000000;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    transition: all 0.2s ease;
+    box-shadow:
+      0 0 20px rgba(0, 255, 65, 0.4),
+      0 0 60px rgba(0, 255, 65, 0.2),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .neon-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 30px rgba(0, 255, 65, 0.6),
+      0 0 80px rgba(0, 255, 65, 0.35),
+      0 20px 40px rgba(0,0,0,0.4);
+  }
+  .neon-btn:active {
+    transform: translateY(0);
+  }
+
+  .bento-card {
+    background: #111111;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .bento-card:hover {
+    border-color: rgba(0, 255, 65, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .green-text { color: #00FF41; }
+  .green-border { border-color: rgba(0, 255, 65, 0.3); }
+  .green-bg { background: rgba(0, 255, 65, 0.08); }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #00FF41;
+    font-family: 'Courier New', monospace;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .noise-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.04;
+  }
+
+  .glow-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.5), transparent);
+  }
+}
+
+/* Animations */
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px #00FF41; }
+  50% { opacity: 0.7; box-shadow: 0 0 14px #00FF41; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes count-up {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-pulse-green { animation: pulse-green 2s ease-in-out infinite; }
+.animate-fade-up { animation: fade-up 0.8s ease forwards; }
+.animate-ticker { animation: ticker 30s linear infinite; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
