@@ -167,6 +167,24 @@
 .delay-400 { animation-delay: 0.4s; }
 .delay-500 { animation-delay: 0.5s; }
 
+/* ─── Scroll-reveal system ──────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(44px);
+  transition:
+    opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-d1 { transition-delay: 0.10s; }
+.reveal-d2 { transition-delay: 0.22s; }
+.reveal-d3 { transition-delay: 0.34s; }
+.reveal-d4 { transition-delay: 0.46s; }
+.reveal-d5 { transition-delay: 0.58s; }
+
 /* Trust strip marquee */
 @keyframes trust-marquee {
   from { transform: translateX(0); }

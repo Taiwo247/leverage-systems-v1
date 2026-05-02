@@ -38,5 +38,20 @@ const {
   </head>
   <body class="bg-[#0A0A0A] text-white antialiased">
     <slot />
+    <script>
+      // Global IntersectionObserver — reveals all .reveal elements on scroll
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.07, rootMargin: '0px 0px -56px 0px' }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+    </script>
   </body>
 </html>
