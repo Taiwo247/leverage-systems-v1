@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
+import TrustStrip from '../components/TrustStrip.astro';
 import LosingGame from '../components/LosingGame.astro';
 import BentoGrid from '../components/BentoGrid.astro';
 import VSLSection from '../components/VSLSection.astro';
@@ -10,64 +11,141 @@ import Footer from '../components/Footer.astro';
 ---
 
 <Layout
-  title="Leverage Systems — AI Sales Infrastructure That Pays For Itself"
-  description="We install AI Sales Infrastructure that engages, qualifies, and books every lead in under 30 seconds. Stop burning ad spend. Start extracting revenue."
+  title="leverageSystems — Stop the Silent Revenue Leak with Autonomous AI Systems"
+  description="You're working for traffic that never returns. We install high-conversion AI infrastructure that captures, nurtures, and closes the leads you're currently losing while you sleep."
 >
   <Navbar />
   <main>
     <Hero />
+    <TrustStrip />
     <LosingGame />
     <BentoGrid />
     <VSLSection />
     <DiagnosticForm />
   </main>
   <Footer />
+
+  <!-- Exit Intent Popup -->
+  <div id="exit-popup" role="dialog" aria-modal="true" aria-labelledby="exit-popup-title">
+    <div id="exit-popup-backdrop"></div>
+    <div id="exit-popup-modal">
+      <div class="gold-top-bar"></div>
+
+      <!-- Warning icon -->
+      <div style="text-align:center; margin-bottom:1rem;">
+        <div style="display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:50%; background:rgba(212,175,55,0.12); border:1px solid rgba(212,175,55,0.3);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.5">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+      </div>
+
+      <h3 id="exit-popup-title" style="text-align:center; font-size:clamp(1.1rem, 4vw, 1.35rem); font-weight:900; color:#fff; line-height:1.3; margin-bottom:0.65rem; font-family:'Inter',sans-serif; letter-spacing:-0.02em;">
+        Wait — Don't leave your revenue to chance.
+      </h3>
+      <p style="text-align:center; color:rgba(255,255,255,0.5); font-size:clamp(0.8rem, 3vw, 0.875rem); line-height:1.6; margin-bottom:1.5rem;">
+        Get the <span style="color:#D4AF37; font-weight:700;">5-Point Revenue Leakage Checklist</span> before you go.
+        Find out exactly where your traffic is disappearing — free, instant access.
+      </p>
+
+      <form id="exit-form" style="display:flex; flex-direction:column; gap:0.75rem;">
+        <input
+          type="email"
+          id="exit-email"
+          class="exit-email-input"
+          placeholder="Enter your email address"
+          required
+          autocomplete="email"
+        />
+        <button type="submit" class="exit-cta-btn">
+          Send Me the Checklist →
+        </button>
+      </form>
+
+      <div id="exit-success" style="display:none; text-align:center; padding:1rem 0;">
+        <div style="color:#00FF41; font-weight:800; font-size:1rem; margin-bottom:0.4rem;">✓ You're in. Check your inbox.</div>
+        <div style="color:rgba(255,255,255,0.4); font-size:0.8rem;">The checklist is on its way.</div>
+      </div>
+
+      <button id="exit-close" style="display:block; width:100%; margin-top:1rem; background:none; border:none; cursor:pointer; color:rgba(255,255,255,0.25); font-size:0.75rem; font-family:'Inter',sans-serif; padding:0.25rem; transition:color 0.2s;"
+        onmouseover="this.style.color='rgba(255,255,255,0.5)'"
+        onmouseout="this.style.color='rgba(255,255,255,0.25)'">
+        No thanks, I'll leave revenue on the table
+      </button>
+    </div>
+  </div>
 </Layout>
 
 <script>
   // Scroll-triggered fade-in animations
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
-  );
-
-  document.querySelectorAll('.bento-card, .section-label').forEach((el) => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-  });
-
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.bento-card.visible, .section-label.visible').forEach((el) => {
-      (el as HTMLElement).style.opacity = '1';
-      (el as HTMLElement).style.transform = 'translateY(0)';
-    });
-  });
-
-  // Apply visible styles when observer fires
-  const styleObserver = new MutationObserver(() => {});
-  document.querySelectorAll('.bento-card, .section-label').forEach((el) => {
+  document.querySelectorAll('.bento-card, .section-label, .killer-card').forEach((el) => {
     const htmlEl = el as HTMLElement;
-    const observerInstance = new IntersectionObserver(
+    htmlEl.style.opacity = '0';
+    htmlEl.style.transform = 'translateY(20px)';
+    htmlEl.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+
+    const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
             htmlEl.style.opacity = '1';
             htmlEl.style.transform = 'translateY(0)';
-            observerInstance.unobserve(htmlEl);
+            obs.unobserve(htmlEl);
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+      { threshold: 0.08, rootMargin: '0px 0px -50px 0px' }
     );
-    observerInstance.observe(htmlEl);
+    obs.observe(htmlEl);
   });
+
+  // Exit intent logic
+  (function () {
+    const popup = document.getElementById('exit-popup');
+    const backdrop = document.getElementById('exit-popup-backdrop');
+    const closeBtn = document.getElementById('exit-close');
+    const form = document.getElementById('exit-form') as HTMLFormElement | null;
+    const successMsg = document.getElementById('exit-success');
+    let shown = false;
+
+    function showPopup() {
+      if (shown) return;
+      shown = true;
+      sessionStorage.setItem('exitShown', '1');
+      popup?.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function hidePopup() {
+      popup?.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    if (sessionStorage.getItem('exitShown')) {
+      shown = true;
+    }
+
+    // Trigger: mouse leaves window from the top
+    document.addEventListener('mouseleave', (e) => {
+      if (e.clientY <= 0 && !shown) {
+        showPopup();
+      }
+    });
+
+    backdrop?.addEventListener('click', hidePopup);
+    closeBtn?.addEventListener('click', hidePopup);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') hidePopup();
+    });
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (form) form.style.display = 'none';
+      if (successMsg) successMsg.style.display = 'block';
+      setTimeout(hidePopup, 2800);
+    });
+  })();
 </script>

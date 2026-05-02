@@ -7,8 +7,10 @@
   --color-surface: #111111;
   --color-surface-2: #161616;
   --color-border: rgba(255, 255, 255, 0.08);
+  --color-gold: #D4AF37;
 
   --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-brand: 'Space Grotesk', system-ui, sans-serif;
 }
 
 @layer base {
@@ -71,6 +73,30 @@
   .green-text { color: #00FF41; }
   .green-border { border-color: rgba(0, 255, 65, 0.3); }
   .green-bg { background: rgba(0, 255, 65, 0.08); }
+
+  /* Logo: circular with gold outer glow */
+  .logo-circle {
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow:
+      0 0 0 2px rgba(212, 175, 55, 0.55),
+      0 0 14px rgba(212, 175, 55, 0.4),
+      0 0 30px rgba(212, 175, 55, 0.18);
+    transition: box-shadow 0.3s ease;
+  }
+  .logo-circle:hover {
+    box-shadow:
+      0 0 0 2px rgba(212, 175, 55, 0.8),
+      0 0 20px rgba(212, 175, 55, 0.6),
+      0 0 45px rgba(212, 175, 55, 0.28);
+  }
+
+  /* Brand wordmark font */
+  .brand-name {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
 
   .section-label {
     display: inline-flex;
@@ -140,3 +166,96 @@
 .delay-300 { animation-delay: 0.3s; }
 .delay-400 { animation-delay: 0.4s; }
 .delay-500 { animation-delay: 0.5s; }
+
+/* Trust strip marquee */
+@keyframes trust-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-trust-marquee {
+  animation: trust-marquee 28s linear infinite;
+}
+.animate-trust-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Exit intent popup */
+#exit-popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+#exit-popup.active {
+  display: flex;
+}
+#exit-popup-modal {
+  position: relative;
+  max-width: 440px;
+  width: 100%;
+  background: #111111;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 4px;
+  padding: clamp(1.25rem, 5vw, 2.5rem);
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 55, 0.1),
+    0 25px 60px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(212, 175, 55, 0.08);
+  animation: exit-pop-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+@keyframes exit-pop-in {
+  from { opacity: 0; transform: scale(0.92) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+#exit-popup-modal .gold-top-bar {
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.7), transparent);
+}
+.exit-email-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  padding: 0.85rem 1rem;
+  color: #fff;
+  font-size: 0.9rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.exit-email-input:focus {
+  border-color: rgba(212, 175, 55, 0.5);
+}
+.exit-email-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+.exit-cta-btn {
+  width: 100%;
+  background: #D4AF37;
+  color: #000;
+  font-weight: 800;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  padding: 0.9rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.35), 0 0 50px rgba(212, 175, 55, 0.15);
+}
+.exit-cta-btn:hover {
+  background: #e8c84a;
+  transform: translateY(-1px);
+}

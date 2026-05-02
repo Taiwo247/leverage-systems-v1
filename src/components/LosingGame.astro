@@ -1,149 +1,176 @@
 ---
-const traditional = [
-  { text: 'Responds in 2–6 hours (if at all)', detail: 'Leads go cold in 5 minutes' },
-  { text: '$6,000–$12,000/month per sales rep', detail: 'Salary, benefits, management overhead' },
-  { text: 'Sleeps, gets sick, quits, demands raises', detail: 'Your pipeline stops when they stop' },
-  { text: 'Forgets follow-ups under pressure', detail: '87% of leads never get a 2nd touch' },
-  { text: 'Crashes under volume spikes', detail: 'Can\'t scale without proportional cost' },
-  { text: 'No data, no feedback loop', detail: 'You can\'t improve what isn\'t measured' },
-];
-
-const leverage = [
-  { text: 'Responds in <30 seconds, every time', detail: 'First mover wins 78% of deals' },
-  { text: 'Fraction of cost, infinite throughput', detail: 'One system handles unlimited leads' },
-  { text: 'Works 24/7/365 without exception', detail: 'Your pipeline never sleeps' },
-  { text: 'Perfect follow-up cadence, always', detail: 'Every lead gets every touchpoint' },
-  { text: 'Infinite scale, zero marginal cost', detail: 'Handle 10x volume overnight' },
-  { text: 'Full analytics, A/B testing, iteration', detail: 'Compound improvements every week' },
-];
 ---
 
-<section id="comparison" class="py-32 bg-[#0A0A0A] relative overflow-hidden">
-  <!-- Background accent -->
-  <div class="absolute inset-0 opacity-[0.03]"
-    style="background: radial-gradient(ellipse at 50% 50%, #00FF41 0%, transparent 60%);">
+<section id="comparison" class="py-20 md:py-32 bg-[#0A0A0A] relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.025]"
+    style="background: radial-gradient(ellipse at 50% 30%, #ff3333 0%, transparent 55%);">
   </div>
 
   <div class="relative z-10 max-w-6xl mx-auto px-6">
+
     <!-- Header -->
     <div class="text-center mb-16">
-      <div class="section-label mb-6">The Problem</div>
-      <h2 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-balance">
-        The Losing Game<br/>
-        <span class="text-white/40">Every Operator Plays</span>
+      <div class="section-label mb-6" style="border-color: rgba(255,68,68,0.35); color: #ff6666;">
+        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse inline-block"></span>
+        The Pain
+      </div>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-balance">
+        3 Silent Killers <span class="text-white/35">Draining Your Revenue Right Now</span>
       </h2>
       <p class="text-white/50 mt-5 text-lg max-w-xl mx-auto">
-        While you sleep, your competitors' AI systems are booking their next 10 clients.
+        These aren't hypothetical risks. They're happening every single day you operate without autonomous AI infrastructure.
       </p>
     </div>
 
-    <!-- Comparison grid -->
-    <div class="grid md:grid-cols-2 gap-4 lg:gap-6">
+    <!-- Silent Killers Stack -->
+    <div class="space-y-5">
 
-      <!-- Traditional Staff -->
-      <div class="relative rounded-sm border border-red-500/15 bg-red-950/10 p-8 md:p-10 overflow-hidden">
-        <!-- Header -->
-        <div class="flex items-center gap-3 mb-8">
-          <div class="w-10 h-10 rounded-sm bg-red-500/10 border border-red-500/20 flex items-center justify-center">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ff4444" stroke-width="2.5">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M15 9l-6 6M9 9l6 6"/>
-            </svg>
-          </div>
-          <div>
-            <div class="text-xs text-red-400/70 font-mono uppercase tracking-widest mb-0.5">Status: Bleeding</div>
-            <h3 class="text-xl font-black text-white">Traditional Sales Staff</h3>
-          </div>
+      <!-- Killer 1: Traffic Leakage -->
+      <div class="killer-card relative rounded-sm border border-red-500/20 bg-red-950/10 p-5 sm:p-8 md:p-10 overflow-hidden group transition-all duration-300 hover:border-red-500/40">
+        <div class="absolute top-0 right-0 w-72 h-72 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+          style="background: radial-gradient(circle, rgba(255,50,50,0.07) 0%, transparent 70%);">
         </div>
 
-        <!-- Items -->
-        <ul class="space-y-4">
-          {traditional.map((item) => (
-            <li class="flex items-start gap-3 group">
-              <div class="w-5 h-5 rounded-full bg-red-500/15 border border-red-500/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#ff4444" stroke-width="3.5">
-                  <path d="M18 6L6 18M6 6l12 12"/>
-                </svg>
-              </div>
-              <div>
-                <div class="text-white/80 font-semibold text-sm leading-snug">{item.text}</div>
-                <div class="text-white/30 text-xs mt-0.5 leading-snug">{item.detail}</div>
-              </div>
-            </li>
-          ))}
-        </ul>
-
-        <!-- Cost badge -->
-        <div class="mt-8 pt-6 border-t border-red-500/10">
-          <div class="flex items-center justify-between">
-            <span class="text-red-400/60 text-sm font-medium">Monthly Cost</span>
-            <span class="text-red-400 font-black text-lg">$6,000–$12,000 <span class="text-red-400/50 text-sm font-normal">/ rep</span></span>
+        <div class="flex flex-col md:flex-row md:items-start gap-8">
+          <!-- Icon -->
+          <div class="flex-shrink-0">
+            <div class="w-14 h-14 rounded-sm bg-red-500/10 border border-red-500/25 flex items-center justify-center">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2">
+                <path d="M3 3l18 18"/>
+                <path d="M10.5 6H19v8.5"/>
+                <path d="M5 12c0 3.87 3.13 7 7 7s7-3.13 7-7"/>
+                <circle cx="12" cy="12" r="1" fill="#ff5555"/>
+              </svg>
+            </div>
           </div>
-          <div class="flex items-center justify-between mt-2">
-            <span class="text-red-400/60 text-sm font-medium">Lead Coverage</span>
-            <span class="text-red-400 font-black text-lg">~60% <span class="text-red-400/50 text-sm font-normal">(the rest decay)</span></span>
+
+          <!-- Content -->
+          <div class="flex-1">
+            <div class="text-xs text-red-400/60 font-mono uppercase tracking-widest mb-2">Silent Killer #01</div>
+            <h3 class="text-2xl md:text-3xl font-black mb-1 text-white">Traffic Leakage</h3>
+            <div class="text-red-400/80 text-sm font-semibold mb-5">— The Hole in the Bucket</div>
+            <p class="text-white/50 text-base leading-relaxed max-w-2xl mb-7">
+              You're paying for clicks, attention, and intent — then watching 63% of those visitors evaporate before a single human can respond.
+              Your funnel isn't a funnel. It's a sieve. Every ad dollar spent without instant AI engagement is <span class="text-white font-semibold">63 cents poured directly into the void.</span>
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div class="bg-[#0A0A0A] border border-red-500/10 rounded-sm p-4">
+                <div class="text-2xl font-black text-red-400 tabular-nums">63%</div>
+                <div class="text-xs text-white/30 mt-1 leading-snug">of leads never convert to even a conversation</div>
+              </div>
+              <div class="bg-[#0A0A0A] border border-red-500/10 rounded-sm p-4">
+                <div class="text-2xl font-black text-red-400 tabular-nums">5 min</div>
+                <div class="text-xs text-white/30 mt-1 leading-snug">before a warm lead goes permanently cold</div>
+              </div>
+              <div class="hidden md:block bg-[#0A0A0A] border border-red-500/10 rounded-sm p-4">
+                <div class="text-2xl font-black text-red-400 tabular-nums">$0</div>
+                <div class="text-xs text-white/30 mt-1 leading-snug">recovered from leaked traffic without automation</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Leverage Systems -->
-      <div class="relative rounded-sm border border-[#00FF41]/20 bg-[#00FF41]/[0.04] p-8 md:p-10 overflow-hidden">
-        <!-- Glow effect -->
-        <div class="absolute top-0 right-0 w-48 h-48 opacity-10 pointer-events-none"
-          style="background: radial-gradient(circle, #00FF41 0%, transparent 70%);">
+      <!-- Killer 2: Manual Work Trap -->
+      <div class="killer-card relative rounded-sm border border-orange-500/20 bg-orange-950/10 p-5 sm:p-8 md:p-10 overflow-hidden group transition-all duration-300 hover:border-orange-500/40">
+        <div class="absolute bottom-0 left-0 w-72 h-72 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+          style="background: radial-gradient(circle, rgba(255,140,50,0.07) 0%, transparent 70%);">
         </div>
 
-        <!-- Header -->
-        <div class="flex items-center gap-3 mb-8">
-          <div class="w-10 h-10 rounded-sm bg-[#00FF41]/10 border border-[#00FF41]/25 flex items-center justify-center">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00FF41" stroke-width="2.5">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-            </svg>
+        <div class="flex flex-col md:flex-row md:items-start gap-8">
+          <!-- Icon -->
+          <div class="flex-shrink-0">
+            <div class="w-14 h-14 rounded-sm bg-orange-500/10 border border-orange-500/25 flex items-center justify-center">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2">
+                <path d="M12 2v20M2 12h20"/>
+                <path d="M12 7a5 5 0 0 1 5 5"/>
+                <path d="M12 17a5 5 0 0 1-5-5"/>
+                <circle cx="12" cy="12" r="3" stroke="#f97316" stroke-width="2"/>
+              </svg>
+            </div>
           </div>
-          <div>
-            <div class="text-xs text-[#00FF41]/70 font-mono uppercase tracking-widest mb-0.5">Status: Extracting</div>
-            <h3 class="text-xl font-black text-white">Leverage Systems AI</h3>
-          </div>
-        </div>
 
-        <!-- Items -->
-        <ul class="space-y-4">
-          {leverage.map((item) => (
-            <li class="flex items-start gap-3 group">
-              <div class="w-5 h-5 rounded-full bg-[#00FF41]/15 border border-[#00FF41]/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00FF41" stroke-width="3.5">
-                  <path d="M20 6L9 17l-5-5"/>
-                </svg>
+          <!-- Content -->
+          <div class="flex-1">
+            <div class="text-xs text-orange-400/60 font-mono uppercase tracking-widest mb-2">Silent Killer #02</div>
+            <h3 class="text-2xl md:text-3xl font-black mb-1 text-white">The Manual Work Trap</h3>
+            <div class="text-orange-400/80 text-sm font-semibold mb-5">— Work a System Should Be Doing</div>
+            <p class="text-white/50 text-base leading-relaxed max-w-2xl mb-7">
+              Your team is spending 4–6 hours a day on follow-ups, scheduling, qualifying calls, and chasing cold leads.
+              You're paying <span class="text-white font-semibold">human-rate wages for robotic-rate tasks</span> — work that an AI system handles in milliseconds, with perfect consistency, 24 hours a day.
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div class="bg-[#0A0A0A] border border-orange-500/10 rounded-sm p-4">
+                <div class="text-2xl font-black text-orange-400 tabular-nums">4–6 hrs</div>
+                <div class="text-xs text-white/30 mt-1 leading-snug">wasted daily on work AI handles instantly</div>
               </div>
-              <div>
-                <div class="text-white font-semibold text-sm leading-snug">{item.text}</div>
-                <div class="text-white/40 text-xs mt-0.5 leading-snug">{item.detail}</div>
+              <div class="bg-[#0A0A0A] border border-orange-500/10 rounded-sm p-4">
+                <div class="text-2xl font-black text-orange-400 tabular-nums">87%</div>
+                <div class="text-xs text-white/30 mt-1 leading-snug">of leads never receive a second follow-up touch</div>
               </div>
-            </li>
-          ))}
-        </ul>
-
-        <!-- Cost badge -->
-        <div class="mt-8 pt-6 border-t border-[#00FF41]/10">
-          <div class="flex items-center justify-between">
-            <span class="text-[#00FF41]/60 text-sm font-medium">Monthly Investment</span>
-            <span class="text-[#00FF41] font-black text-lg">Fixed <span class="text-[#00FF41]/50 text-sm font-normal">(not per-seat)</span></span>
-          </div>
-          <div class="flex items-center justify-between mt-2">
-            <span class="text-[#00FF41]/60 text-sm font-medium">Lead Coverage</span>
-            <span class="text-[#00FF41] font-black text-lg">100% <span class="text-[#00FF41]/50 text-sm font-normal">(zero decay)</span></span>
+              <div class="hidden md:block bg-[#0A0A0A] border border-orange-500/10 rounded-sm p-4">
+                <div class="text-2xl font-black text-orange-400 tabular-nums">$12K+</div>
+                <div class="text-xs text-white/30 mt-1 leading-snug">monthly in rep cost doing automatable work</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Killer 3: Lost Revenue Ghost -->
+      <div class="killer-card relative rounded-sm border border-red-500/20 bg-red-950/10 p-5 sm:p-8 md:p-10 overflow-hidden group transition-all duration-300 hover:border-red-500/40">
+        <div class="absolute top-1/2 right-0 -translate-y-1/2 w-72 h-72 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+          style="background: radial-gradient(circle, rgba(255,50,50,0.07) 0%, transparent 70%);">
+        </div>
+
+        <div class="flex flex-col md:flex-row md:items-start gap-8">
+          <!-- Icon -->
+          <div class="flex-shrink-0">
+            <div class="w-14 h-14 rounded-sm bg-red-500/10 border border-red-500/25 flex items-center justify-center">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ff5555" stroke-width="2">
+                <path d="M12 2C8 2 5 5.5 5 9c0 5 7 13 7 13s7-8 7-13c0-3.5-3-7-7-7z"/>
+                <path d="M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                <path d="M8 20l-2 2M16 20l2 2" stroke-opacity="0.4"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="flex-1">
+            <div class="text-xs text-red-400/60 font-mono uppercase tracking-widest mb-2">Silent Killer #03</div>
+            <h3 class="text-2xl md:text-3xl font-black mb-1 text-white">The Lost Revenue Ghost</h3>
+            <div class="text-red-400/80 text-sm font-semibold mb-5">— The Money You Don't See Leaving</div>
+            <p class="text-white/50 text-base leading-relaxed max-w-2xl mb-7">
+              This isn't hypothetical. It's the compound cost of slow responses, missed follow-ups, and unqualified calls that disguise themselves as "just a slow month."
+              <span class="text-white font-semibold">$25,000+ is leaving your business every month.</span> Silently. Invisibly. And without a system to stop it, it always will.
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div class="bg-[#0A0A0A] border border-red-500/10 rounded-sm p-4">
+                <div class="text-2xl font-black text-red-400 tabular-nums">$25K+</div>
+                <div class="text-xs text-white/30 mt-1 leading-snug">leaking from your pipeline every single month</div>
+              </div>
+              <div class="bg-[#0A0A0A] border border-red-500/10 rounded-sm p-4">
+                <div class="text-2xl font-black text-red-400 tabular-nums">Invisible</div>
+                <div class="text-xs text-white/30 mt-1 leading-snug">doesn't show on your P&L — disguised as "slow months"</div>
+              </div>
+              <div class="hidden md:block bg-[#0A0A0A] border border-red-500/10 rounded-sm p-4">
+                <div class="text-2xl font-black text-red-400 tabular-nums">Compounding</div>
+                <div class="text-xs text-white/30 mt-1 leading-snug">every unconverted lead is a lost referral chain too</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- Bottom CTA pull -->
-    <div class="text-center mt-14">
+    <div class="text-center mt-16">
       <p class="text-white/40 text-base mb-6">
         Every month you wait is another <span class="text-white font-semibold">$25,000+</span> your pipeline doesn't capture.
       </p>
       <a href="#diagnostic" class="neon-btn inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold rounded-sm">
-        Calculate My Revenue Leak
+        Run My Revenue Audit
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>

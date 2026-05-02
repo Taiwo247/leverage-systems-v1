@@ -66,7 +66,7 @@ const steps = [
 ];
 ---
 
-<section id="diagnostic" class="py-32 bg-[#0A0A0A] relative overflow-hidden">
+<section id="diagnostic" class="py-20 md:py-32 bg-[#0A0A0A] relative overflow-hidden">
   <!-- Green ambient glow -->
   <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] opacity-[0.05] pointer-events-none"
     style="background: radial-gradient(circle, #00FF41 0%, transparent 70%);">
@@ -106,15 +106,15 @@ const steps = [
       </div>
 
       <!-- Step counter -->
-      <div class="flex items-center justify-between px-8 pt-6 pb-0">
+      <div class="flex items-center justify-between px-5 sm:px-8 pt-6 pb-0">
         <div id="step-label" class="text-xs text-[#00FF41]/70 font-mono uppercase tracking-widest">
           Step 1 of 5 — Business Profile
         </div>
-        <div class="text-xs text-white/20 font-mono" id="step-counter">01 / 05</div>
+        <div class="text-xs text-white/20 font-mono flex-shrink-0 ml-2" id="step-counter">01 / 05</div>
       </div>
 
       <!-- Steps container -->
-      <div id="form-steps" class="px-8 pb-8 pt-6">
+      <div id="form-steps" class="px-5 sm:px-8 pb-6 sm:pb-8 pt-6">
 
         <!-- Steps will be rendered by JS -->
         <div id="step-content" class="min-h-[280px]">
