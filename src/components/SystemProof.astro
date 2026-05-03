@@ -1,130 +1,96 @@
 ---
 ---
 
-<section id="system-proof" class="py-[7.5rem] relative overflow-hidden border-y border-white/5"
-  style="background: linear-gradient(180deg, #0A0A0A 0%, #0D0C08 50%, #0A0A0A 100%);">
+<section id="system-proof" class="py-[7.5rem] bg-[#0A0A0A] relative overflow-hidden border-t border-white/5">
 
-  <!-- Gold ambient glow -->
-  <div class="absolute inset-0 pointer-events-none opacity-[0.04]"
-    style="background: radial-gradient(ellipse at 50% 50%, #D4AF37 0%, transparent 65%);">
-  </div>
-
-  <div class="relative z-10 max-w-6xl mx-auto px-6">
+  <div class="max-w-5xl mx-auto px-6 relative z-10">
 
     <!-- Header -->
-    <div class="text-center mb-14 reveal">
-      <!-- Live badge -->
-      <div class="inline-flex items-center gap-2.5 mb-8 px-5 py-2 rounded-full border"
-        style="background: rgba(212,175,55,0.07); border-color: rgba(212,175,55,0.28);">
-        <span class="w-2 h-2 rounded-full animate-pulse-gold" style="background:#D4AF37;"></span>
-        <span class="text-xs font-mono uppercase tracking-widest" style="color: #D4AF37;">Conversion Stack · Live</span>
-      </div>
-
-      <h2 class="font-black tracking-tight text-balance mb-6" style="font-size: clamp(2rem, 5vw, 4rem); line-height: 1.05;">
-        Infrastructure Proof:<br/>
-        <span style="color: #D4AF37;">You Are Inside the Machine.</span>
+    <div class="text-center mb-16 reveal">
+      <div class="section-label mb-6">What You Get</div>
+      <h2 class="font-black tracking-tight text-balance mb-5" style="font-size: clamp(2rem, 5vw, 4rem); line-height: 1.05;">
+        What Happens After<br/>
+        <span class="text-[#D4AF37]">You Hit Submit.</span>
       </h2>
-
-      <p class="max-w-2xl mx-auto leading-relaxed" style="color: rgba(255,255,255,0.55); font-size: clamp(1rem, 2vw, 1.15rem);">
-        LeverageSystems doesn't just sell AI; we live it. This platform is currently running our proprietary
-        Conversion Stack—monitoring engagement, qualifying intent, and preparing a response in
-        <span style="color: #D4AF37; font-weight: 700;">&lt;30 seconds.</span>
-        This is the same power we install for you.
+      <p class="max-w-xl mx-auto leading-relaxed" style="color: rgba(255,255,255,0.45); font-size: clamp(0.95rem, 2vw, 1.1rem);">
+        You don't just fill out a form. You step into an automated system built to respond, qualify, and close — starting the moment you submit.
       </p>
     </div>
 
-    <!-- Live activity terminal -->
-    <div class="reveal reveal-d1 rounded-sm overflow-hidden" style="border: 1px solid rgba(212,175,55,0.18); background: #0A0A0A;">
-      <!-- Terminal header -->
-      <div class="flex items-center gap-3 px-5 py-3.5 border-b" style="background: #111; border-color: rgba(212,175,55,0.12);">
-        <div class="flex gap-1.5">
-          <span class="w-3 h-3 rounded-full bg-white/10"></span>
-          <span class="w-3 h-3 rounded-full bg-white/10"></span>
-          <span class="w-3 h-3 rounded-full bg-white/10"></span>
+    <!-- Steps grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-14">
+
+      <!-- Step 01 -->
+      <div class="reveal reveal-d1 bg-[#111] border border-white/8 rounded-sm p-7 group hover:border-[#D4AF37]/25 transition-colors duration-300 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent"></div>
+        <div class="flex items-start gap-5">
+          <div class="w-12 h-12 rounded-sm flex items-center justify-center flex-shrink-0 font-black text-base" style="background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.2); color: #D4AF37;">01</div>
+          <div>
+            <div class="text-[10px] font-mono uppercase tracking-widest mb-2" style="color: rgba(212,175,55,0.5);">Immediately</div>
+            <h3 class="text-lg font-black text-white mb-2">Confirmation Email Sent</h3>
+            <p class="text-sm leading-relaxed" style="color: rgba(255,255,255,0.45);">
+              A branded confirmation lands in your inbox within 30 seconds. Your audit is logged, your data is secure, and the system is already moving.
+            </p>
+          </div>
         </div>
-        <span class="text-xs font-mono ml-2" style="color: rgba(212,175,55,0.5);">leverage-systems / conversion-stack / monitor.ts</span>
-        <span class="ml-auto flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full animate-pulse-gold" style="background:#D4AF37;"></span>
-          <span class="text-[10px] font-mono uppercase tracking-widest" style="color: rgba(212,175,55,0.5);">Running</span>
-        </span>
       </div>
 
-      <!-- Terminal body -->
-      <div class="p-5 sm:p-7 font-mono text-xs space-y-2" style="color: rgba(255,255,255,0.45);">
-        <div class="flex gap-4">
-          <span style="color: rgba(212,175,55,0.5);" class="flex-shrink-0">[SYS]</span>
-          <span>Conversion stack initialized. Monitoring <span style="color:#D4AF37;">active visitors</span>...</span>
-        </div>
-        <div class="flex gap-4">
-          <span style="color: rgba(212,175,55,0.5);" class="flex-shrink-0">[ENG]</span>
-          <span>Engagement signals captured — session depth, scroll velocity, intent markers.</span>
-        </div>
-        <div class="flex gap-4">
-          <span style="color: rgba(0,255,65,0.6);" class="flex-shrink-0">[AI]</span>
-          <span>Lead qualification model: <span style="color:#00FF41;">94.2% accuracy</span> against ICP profile.</span>
-        </div>
-        <div class="flex gap-4">
-          <span style="color: rgba(0,255,65,0.6);" class="flex-shrink-0">[AI]</span>
-          <span>Response pipeline warmed. Outreach latency: <span style="color:#00FF41;">&lt;30s</span> from form submit.</span>
-        </div>
-        <div id="live-log" class="flex gap-4">
-          <span style="color: rgba(212,175,55,0.7);" class="flex-shrink-0">[NOW]</span>
-          <span style="color: rgba(255,255,255,0.7);">
-            <span id="live-status">Qualifying visitor intent...</span>
-            <span class="inline-block w-1.5 h-3.5 ml-1 align-middle animate-blink-cursor" style="background:#D4AF37;"></span>
-          </span>
+      <!-- Step 02 -->
+      <div class="reveal reveal-d2 bg-[#111] border border-white/8 rounded-sm p-7 group hover:border-[#00FF41]/20 transition-colors duration-300 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#00FF41]/20 to-transparent"></div>
+        <div class="flex items-start gap-5">
+          <div class="w-12 h-12 rounded-sm flex items-center justify-center flex-shrink-0 font-black text-base" style="background: rgba(0,255,65,0.08); border: 1px solid rgba(0,255,65,0.2); color: #00FF41;">02</div>
+          <div>
+            <div class="text-[10px] font-mono uppercase tracking-widest mb-2" style="color: rgba(0,255,65,0.5);">&lt; 30 Seconds</div>
+            <h3 class="text-lg font-black text-white mb-2">AI Analyzes Your Profile</h3>
+            <p class="text-sm leading-relaxed" style="color: rgba(255,255,255,0.45);">
+              Our conversion stack maps your business type, ad spend, and lead volume to calculate your exact monthly revenue leak and infrastructure gap.
+            </p>
+          </div>
         </div>
       </div>
+
+      <!-- Step 03 -->
+      <div class="reveal reveal-d1 bg-[#111] border border-white/8 rounded-sm p-7 group hover:border-[#00FF41]/20 transition-colors duration-300 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#00FF41]/20 to-transparent"></div>
+        <div class="flex items-start gap-5">
+          <div class="w-12 h-12 rounded-sm flex items-center justify-center flex-shrink-0 font-black text-base" style="background: rgba(0,255,65,0.08); border: 1px solid rgba(0,255,65,0.2); color: #00FF41;">03</div>
+          <div>
+            <div class="text-[10px] font-mono uppercase tracking-widest mb-2" style="color: rgba(0,255,65,0.5);">Within 24 Hours</div>
+            <h3 class="text-lg font-black text-white mb-2">Personal Revenue Report</h3>
+            <p class="text-sm leading-relaxed" style="color: rgba(255,255,255,0.45);">
+              Your custom Revenue Leakage Report lands in your inbox — naming the exact gaps, the estimated monthly cost, and the infrastructure needed to fix it.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 04 -->
+      <div class="reveal reveal-d2 bg-[#111] border border-white/8 rounded-sm p-7 group hover:border-[#D4AF37]/25 transition-colors duration-300 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent"></div>
+        <div class="flex items-start gap-5">
+          <div class="w-12 h-12 rounded-sm flex items-center justify-center flex-shrink-0 font-black text-base" style="background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.2); color: #D4AF37;">04</div>
+          <div>
+            <div class="text-[10px] font-mono uppercase tracking-widest mb-2" style="color: rgba(212,175,55,0.5);">Your Call</div>
+            <h3 class="text-lg font-black text-white mb-2">Strategy Call Scheduled</h3>
+            <p class="text-sm leading-relaxed" style="color: rgba(255,255,255,0.45);">
+              A LeverageSystems specialist walks you through your findings, answers every question, and maps the fastest path from where you are to fully autonomous.
+            </p>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Proof metrics -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 reveal reveal-d2">
-      {[
-        { value: '<30s', label: 'Response Time', color: '#D4AF37' },
-        { value: '94%', label: 'Qualification Rate', color: '#D4AF37' },
-        { value: '24/7', label: 'Stack Uptime', color: '#D4AF37' },
-        { value: '100%', label: 'Lead Coverage', color: '#D4AF37' },
-      ].map(stat => (
-        <div class="rounded-sm px-6 py-5 text-center" style="background:#111; border: 1px solid rgba(212,175,55,0.12);">
-          <div class="text-2xl font-black tabular-nums" style={`color: ${stat.color};`}>{stat.value}</div>
-          <div class="text-xs mt-1 uppercase tracking-wider font-medium" style="color: rgba(255,255,255,0.3);">{stat.label}</div>
-        </div>
-      ))}
+    <!-- Bottom CTA -->
+    <div class="text-center reveal">
+      <a href="#diagnostic" class="neon-btn inline-flex items-center justify-center gap-3 px-8 py-4 text-base font-bold rounded-sm w-full sm:w-auto">
+        Get My Revenue Audit
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
     </div>
 
   </div>
 </section>
-
-<style>
-  @keyframes pulse-gold {
-    0%, 100% { opacity: 1; box-shadow: 0 0 6px #D4AF37; }
-    50% { opacity: 0.65; box-shadow: 0 0 14px #D4AF37; }
-  }
-  .animate-pulse-gold { animation: pulse-gold 2s ease-in-out infinite; }
-
-  @keyframes blink-cursor {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-  .animate-blink-cursor { animation: blink-cursor 1s step-end infinite; }
-</style>
-
-<script>
-  const messages = [
-    'Qualifying visitor intent...',
-    'Mapping conversion bottlenecks...',
-    'Scanning lead engagement depth...',
-    'Warming response pipeline...',
-    'Infrastructure running at full capacity.',
-    'Monitoring scroll velocity and intent...',
-    'Preparing outreach sequence...',
-  ];
-  let idx = 0;
-  const el = document.getElementById('live-status');
-  if (el) {
-    setInterval(() => {
-      idx = (idx + 1) % messages.length;
-      el.textContent = messages[idx];
-    }, 2800);
-  }
-</script>
