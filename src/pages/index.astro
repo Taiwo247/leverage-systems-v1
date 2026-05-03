@@ -5,14 +5,15 @@ import Hero from '../components/Hero.astro';
 import TrustStrip from '../components/TrustStrip.astro';
 import LosingGame from '../components/LosingGame.astro';
 import BentoGrid from '../components/BentoGrid.astro';
+import SystemProof from '../components/SystemProof.astro';
 import SocialProof from '../components/SocialProof.astro';
 import DiagnosticForm from '../components/DiagnosticForm.astro';
 import Footer from '../components/Footer.astro';
 ---
 
 <Layout
-  title="leverageSystems — Stop the Silent Revenue Leak with Autonomous AI Systems"
-  description="You're working for traffic that never returns. We install high-conversion AI infrastructure that captures, nurtures, and closes the leads you're currently losing while you sleep."
+  title="LeverageSystems | Autonomous AI Lead Conversion Infrastructure"
+  description="We stop revenue leakage for high-growth brands using proprietary AI conversion stacks. Capture, nurture, and close leads 24/7."
 >
   <Navbar />
   <main>
@@ -20,6 +21,7 @@ import Footer from '../components/Footer.astro';
     <TrustStrip />
     <LosingGame />
     <BentoGrid />
+    <SystemProof />
     <SocialProof />
     <DiagnosticForm />
   </main>
@@ -99,8 +101,20 @@ import Footer from '../components/Footer.astro';
     backdrop?.addEventListener('click', hidePopup);
     closeBtn?.addEventListener('click', hidePopup);
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hidePopup(); });
-    form?.addEventListener('submit', (e) => {
+    form?.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const emailInput = document.getElementById('exit-email') as HTMLInputElement | null;
+      const email = emailInput?.value?.trim();
+      if (email) {
+        try {
+          fetch('/api/exit-capture', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, source: 'Exit Intent Popup' }),
+            keepalive: true,
+          });
+        } catch (_) {}
+      }
       if (form) form.style.display = 'none';
       if (successMsg) successMsg.style.display = 'block';
       setTimeout(hidePopup, 2800);

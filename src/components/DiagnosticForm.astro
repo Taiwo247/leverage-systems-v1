@@ -22,6 +22,7 @@ const steps = [
     subtitle: 'This determines how much revenue is currently leaking.',
     type: 'cards',
     options: [
+      { value: '0-5k', label: '$0 – $5K / mo', icon: '○' },
       { value: '5-15k', label: '$5K – $15K / mo', icon: '◎' },
       { value: '15-50k', label: '$15K – $50K / mo', icon: '◉' },
       { value: '50-100k', label: '$50K – $100K / mo', icon: '●' },
@@ -194,6 +195,7 @@ const steps = [
       subtitle: 'This determines how much revenue is currently leaking.',
       type: 'cards',
       options: [
+        { value: '0-5k', label: '$0 – $5K / mo', emoji: null },
         { value: '5-15k', label: '$5K – $15K / mo', emoji: null },
         { value: '15-50k', label: '$15K – $50K / mo', emoji: null },
         { value: '50-100k', label: '$50K – $100K / mo', emoji: null },
@@ -357,23 +359,144 @@ const steps = [
     }
   }
 
+  // ── Secure API endpoint ──────────────────────────────────────────────────
+  // Webhook URL is stored server-side in .env (MAKE_AUDIT_WEBHOOK).
+  // The client never sees the raw webhook URL.
+  function pushToZapier(data) {
+    try {
+      fetch('/api/submit-audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email:         data.email         || '',
+          name:          data.name          || '',
+          phone:         data.phone         || '',
+          website:       data.url           || '',
+          business_type: data[1]            || '',
+          ad_spend:      data[2]            || '',
+          lead_volume:   data[3]            || '',
+          crm:           data[4]            || '',
+        }),
+        keepalive: true,
+      });
+    } catch (_) { /* fail silently — never break the UX */ }
+  }
+
   function showSuccess() {
+    progressBar.style.width = '100%';
+
+    // Fire webhook immediately — do NOT await, do NOT block the animation
+    pushToZapier({ ...answers });
+
+    const email = answers.email || '';
+
     document.getElementById('form-steps').innerHTML = `
-      <div class="py-12 text-center">
-        <div class="w-20 h-20 rounded-full bg-[#00FF41]/15 border-2 border-[#00FF41]/40 flex items-center justify-center mx-auto mb-6" style="box-shadow: 0 0 40px rgba(0,255,65,0.2);">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00FF41" stroke-width="2.5">
-            <path d="M20 6L9 17l-5-5"/>
-          </svg>
+      <div id="audit-phases" class="py-8">
+
+        <!-- ── Phase 1: Processing animation ── -->
+        <div id="processing-screen" style="transition: opacity 0.35s ease;">
+
+          <div class="flex justify-center mb-6">
+            <div class="relative w-20 h-20">
+              <div class="absolute inset-0 rounded-full border border-[#00FF41]/20 animate-ping" style="animation-duration:1.9s;"></div>
+              <div class="absolute inset-2 rounded-full border border-[#00FF41]/30 animate-ping" style="animation-duration:1.9s; animation-delay:0.45s;"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-10 h-10 rounded-full bg-[#00FF41]/10 border border-[#00FF41]/50 flex items-center justify-center">
+                  <div class="w-3 h-3 rounded-full bg-[#00FF41] animate-pulse-green"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mb-6">
+            <p class="text-[#00FF41] font-mono text-sm tracking-wide leading-relaxed">
+              LeverageSystems AI is analyzing your<br/>conversion architecture...
+            </p>
+          </div>
+
+          <div class="bg-[#0A0A0A] border border-white/8 rounded-sm p-4 space-y-2 max-w-sm mx-auto mb-5">
+            <div id="log-1" style="color:transparent; transition: color 0.4s ease;" class="flex items-center gap-2 font-mono text-xs">
+              <span class="flex-shrink-0 text-[#00FF41]">▸</span> Scanning lead flow gaps...
+            </div>
+            <div id="log-2" style="color:transparent; transition: color 0.4s ease;" class="flex items-center gap-2 font-mono text-xs">
+              <span class="flex-shrink-0 text-white/30">▸</span> Mapping conversion bottlenecks...
+            </div>
+            <div id="log-3" style="color:transparent; transition: color 0.4s ease;" class="flex items-center gap-2 font-mono text-xs">
+              <span class="flex-shrink-0 text-white/30">▸</span> Calculating monthly revenue leak...
+            </div>
+            <div id="log-4" style="color:transparent; transition: color 0.4s ease;" class="flex items-center gap-2 font-mono text-xs">
+              <span class="flex-shrink-0 text-white/30">▸</span> Building infrastructure blueprint...
+            </div>
+            <div id="log-5" style="color:transparent; transition: color 0.4s ease;" class="flex items-center gap-2 font-mono text-xs">
+              <span class="flex-shrink-0 text-[#00FF41]">✓</span> Generating proprietary report...
+            </div>
+          </div>
+
+          <div class="max-w-sm mx-auto px-1">
+            <div class="h-px bg-white/5 rounded-full overflow-hidden">
+              <div id="scan-bar" class="h-full bg-[#00FF41]" style="width:0%; transition: width 2.65s linear;"></div>
+            </div>
+          </div>
         </div>
-        <h3 class="text-2xl font-black text-white mb-2">Audit Submitted.</h3>
-        <p class="text-white/50 text-base mb-6 max-w-xs mx-auto">We're reviewing your profile now. Expect a personalized revenue report within 24 hours.</p>
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-[#00FF41]/10 border border-[#00FF41]/25 rounded-sm text-[#00FF41] text-sm font-mono">
-          <span class="w-2 h-2 rounded-full bg-[#00FF41] animate-pulse-green"></span>
-          Your audit is being processed
+
+        <!-- ── Phase 2: Luxury success state ── -->
+        <div id="success-screen" class="text-center py-2" style="display:none; opacity:0; transition: opacity 0.45s ease;">
+          <div
+            class="w-20 h-20 rounded-full bg-[#00FF41]/15 border-2 border-[#00FF41]/50 flex items-center justify-center mx-auto mb-5"
+            style="box-shadow: 0 0 60px rgba(0,255,65,0.22);"
+          >
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#00FF41" stroke-width="2.5">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          </div>
+          <div class="text-[10px] text-[#00FF41]/50 font-mono uppercase tracking-widest mb-3">SYSTEM · AUDIT_INITIALIZED</div>
+          <h3 class="text-2xl font-black text-white mb-2">Audit Initialized.</h3>
+          <p class="text-white/50 text-base max-w-xs mx-auto leading-relaxed mb-1">
+            Check your inbox for your proprietary Revenue Leakage Report.
+          </p>
+          <p class="text-[#00FF41] font-bold text-base">Welcome to the Machine.</p>
+          <div class="mt-7 inline-flex items-center gap-2 px-4 py-2 bg-[#00FF41]/10 border border-[#00FF41]/25 rounded-sm text-[#00FF41] text-xs font-mono">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#00FF41] animate-pulse-green"></span>
+            Report dispatched · ${email}
+          </div>
         </div>
+
       </div>
     `;
-    progressBar.style.width = '100%';
+
+    // Start the scan bar on next frame so the CSS transition fires
+    requestAnimationFrame(() => {
+      const bar = document.getElementById('scan-bar');
+      if (bar) bar.style.width = '100%';
+    });
+
+    // Reveal log lines one by one
+    const logDelays = [180, 630, 1080, 1530, 2020];
+    logDelays.forEach((delay, i) => {
+      setTimeout(() => {
+        const el = document.getElementById(`log-${i + 1}`);
+        if (!el) return;
+        el.style.color = (i === 0 || i === 4)
+          ? 'rgba(0, 255, 65, 0.65)'
+          : 'rgba(255, 255, 255, 0.45)';
+      }, delay);
+    });
+
+    // Cross-fade to success state at 2.9 s
+    setTimeout(() => {
+      const proc = document.getElementById('processing-screen');
+      const succ = document.getElementById('success-screen');
+      if (!proc || !succ) return;
+      proc.style.opacity = '0';
+      setTimeout(() => {
+        proc.style.display = 'none';
+        succ.style.display = 'block';
+        // Double rAF ensures display:block has painted before opacity transition starts
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          succ.style.opacity = '1';
+        }));
+      }, 360);
+    }, 2900);
   }
 
   btnNext.addEventListener('click', () => {

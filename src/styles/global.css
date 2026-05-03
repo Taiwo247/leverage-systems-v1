@@ -62,7 +62,7 @@
 
   .bento-card {
     background: #111111;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: border-color 0.3s ease, transform 0.3s ease;
   }
   .bento-card:hover {
@@ -140,6 +140,16 @@
 }
 
 /* Animations */
+@keyframes breathe {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px rgba(212,175,55,0.45)) drop-shadow(0 0 8px rgba(212,175,55,0.2));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 9px rgba(212,175,55,0.75)) drop-shadow(0 0 20px rgba(212,175,55,0.4));
+    transform: scale(1.04);
+  }
+}
 @keyframes pulse-green {
   0%, 100% { opacity: 1; box-shadow: 0 0 6px #00FF41; }
   50% { opacity: 0.7; box-shadow: 0 0 14px #00FF41; }
@@ -160,6 +170,7 @@
 .animate-pulse-green { animation: pulse-green 2s ease-in-out infinite; }
 .animate-fade-up { animation: fade-up 0.8s ease forwards; }
 .animate-ticker { animation: ticker 30s linear infinite; }
+.logo-svg { animation: breathe 3.5s ease-in-out infinite; }
 
 .delay-100 { animation-delay: 0.1s; }
 .delay-200 { animation-delay: 0.2s; }
@@ -276,4 +287,12 @@
 .exit-cta-btn:hover {
   background: #e8c84a;
   transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .neon-btn {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+  }
 }
