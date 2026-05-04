@@ -1,34 +1,36 @@
 ---
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-center md:justify-between px-6 md:px-12 py-4 border-b border-white/5 backdrop-blur-md bg-[#0A0A0A]/85">
+<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-center md:justify-between px-6 md:px-12 py-4 border-b border-white/5 backdrop-blur-md bg-[#0A0A0A]/90">
 
-  <!-- Logo: centered on mobile, left on desktop -->
+  <!-- Logo — centered on mobile, left on desktop -->
   <a href="/" class="flex items-center gap-3 group">
-    <img src="/logo.png" alt="LeverageSystems" class="logo-circle" width="44" height="44" />
-    <span class="brand-name text-white tracking-tight" style="font-size: clamp(1rem, 2vw, 1.2rem);">leverageSystems</span>
+    <img src="/logo.svg" alt="LeverageSystems" class="logo-svg-img" width="44" height="44" />
+    <span class="brand-name text-white tracking-tight text-lg">leverageSystems</span>
   </a>
 
-  <!-- Center links (desktop only) -->
+  <!-- Nav links (desktop only) -->
   <div class="hidden md:flex items-center gap-8 text-sm text-white/45 font-medium">
     <a href="#comparison" class="hover:text-white transition-colors">How It Works</a>
     <a href="#engine" class="hover:text-white transition-colors">Features</a>
     <a href="#results" class="hover:text-white transition-colors">Results</a>
   </div>
 
-  <!-- CTA (desktop only) -->
-  <a href="#diagnostic" class="neon-btn hidden md:inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold rounded-sm">
-    Run My Revenue Audit
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
-      <path d="M5 12h14M12 5l7 7-7 7"/>
-    </svg>
-  </a>
+  <!-- CTA (desktop only — wrapped in hidden div so neon-btn mobile CSS never fires) -->
+  <div class="hidden md:block">
+    <a href="#diagnostic" class="neon-btn inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold rounded-sm">
+      Run My Revenue Audit
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
 
-  <!-- Hamburger (mobile) — absolute so it doesn't disturb logo centering -->
+  <!-- Hamburger (mobile) — absolute so it doesn't disturb centered logo -->
   <button id="mobile-menu-toggle" class="md:hidden absolute right-6 flex flex-col gap-1.5 p-2" aria-label="Open menu">
-    <span class="w-5 h-0.5 bg-white block transition-all"></span>
-    <span class="w-5 h-0.5 bg-white block transition-all"></span>
-    <span class="w-3 h-0.5 bg-white block transition-all"></span>
+    <span class="w-5 h-0.5 bg-white block"></span>
+    <span class="w-5 h-0.5 bg-white block"></span>
+    <span class="w-3 h-0.5 bg-white block"></span>
   </button>
 </nav>
 
@@ -37,7 +39,7 @@
   <a href="#comparison" class="text-3xl font-black text-white" onclick="document.getElementById('mobile-menu').classList.add('translate-y-full')">How It Works</a>
   <a href="#engine" class="text-3xl font-black text-white" onclick="document.getElementById('mobile-menu').classList.add('translate-y-full')">Features</a>
   <a href="#results" class="text-3xl font-black text-white" onclick="document.getElementById('mobile-menu').classList.add('translate-y-full')">Results</a>
-  <a href="#diagnostic" class="neon-btn mt-4 px-10 py-4 text-lg font-bold rounded-sm w-72 text-center" onclick="document.getElementById('mobile-menu').classList.add('translate-y-full')">
+  <a href="#diagnostic" class="neon-btn mt-4 px-10 py-4 text-lg font-bold rounded-sm w-72 text-center block" onclick="document.getElementById('mobile-menu').classList.add('translate-y-full')">
     Run My Revenue Audit
   </a>
 </div>
