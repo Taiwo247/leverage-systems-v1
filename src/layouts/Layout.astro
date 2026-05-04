@@ -35,6 +35,19 @@ const {
     <meta property="og:type" content="website" />
 
     <title>{title}</title>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "LeverageSystems",
+      "serviceType": ["AI Automation", "Lead Generation"],
+      "provider": {
+        "@type": "Organization",
+        "name": "LeverageSystems"
+      }
+    }
+    </script>
   </head>
   <body class="bg-[#0A0A0A] text-white antialiased">
     <slot />
