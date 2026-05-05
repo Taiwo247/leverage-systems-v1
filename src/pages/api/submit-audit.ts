@@ -134,7 +134,7 @@ export const POST: APIRoute = async ({ request }) => {
 
           <!-- CTA -->
           <table cellpadding="0" cellspacing="0"><tr><td style="background:#00FF41;border-radius:3px;">
-            <a href="https://leveragesystems.ai/#diagnostic" style="display:inline-block;padding:14px 28px;font-size:14px;font-weight:800;color:#000000;text-decoration:none;letter-spacing:-0.01em;">
+            <a href="https://leveragesystems.ai/audit-status" style="display:inline-block;padding:14px 28px;font-size:14px;font-weight:800;color:#000000;text-decoration:none;letter-spacing:-0.01em;">
               View Your Audit Status →
             </a>
           </td></tr></table>

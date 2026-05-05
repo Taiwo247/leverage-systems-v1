@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Audit Initialized — Leverage Systems"
+  description="Your Revenue Audit has been received. Our system is analyzing your conversion architecture."
+>
+  <div class="min-h-screen bg-[#0A0A0A] flex items-center justify-center px-6 py-20">
+
+    <!-- Background glow -->
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true"
+      style="background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(212,175,55,0.06) 0%, transparent 70%);">
+    </div>
+
+    <div class="relative z-10 max-w-lg w-full text-center">
+
+      <!-- Icon -->
+      <div class="mx-auto mb-8 w-16 h-16 rounded-full flex items-center justify-center"
+        style="background: rgba(0,255,65,0.08); border: 1px solid rgba(0,255,65,0.2);">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00FF41" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+
+      <!-- Label -->
+      <div class="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full"
+        style="border: 1px solid rgba(0,255,65,0.2); background: rgba(0,255,65,0.05);">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#00FF41] animate-pulse-green flex-shrink-0"></span>
+        <span style="font-size: 10px; font-family: monospace; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(0,255,65,0.7);">Audit Initialized</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="font-black mb-4" style="font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -0.04em; line-height: 1.05; color: #fff;">
+        The Machine is<br/>
+        <span style="background: linear-gradient(135deg, #D4AF37 0%, #F5D06B 45%, #C9A227 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Moving.</span>
+      </h1>
+
+      <!-- Divider -->
+      <div class="mx-auto mb-6" style="height: 1px; max-width: 180px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.35), transparent);"></div>
+
+      <p class="mb-10 leading-relaxed" style="color: rgba(255,255,255,0.45); font-size: 1rem; max-width: 34rem; margin-left: auto; margin-right: auto;">
+        Your Revenue Audit has been received and is being processed. Expect your
+        <span style="color: rgba(255,255,255,0.8); font-weight: 600;">Revenue Leakage Report</span>
+        in your inbox within 24 hours.
+      </p>
+
+      <!-- Steps -->
+      <div class="text-left mb-10 rounded-sm overflow-hidden" style="border: 1px solid rgba(255,255,255,0.07); background: #111111;">
+        <div class="px-6 py-4" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+          <div class="flex items-start gap-4">
+            <span class="font-black text-sm mt-0.5" style="color: #D4AF37; min-width: 20px;">01</span>
+            <div>
+              <div class="font-semibold text-white text-sm mb-0.5">AI Analysis — Complete</div>
+              <div style="font-size: 12px; color: rgba(255,255,255,0.35);">Your business profile has been processed by our conversion intelligence system</div>
+            </div>
+            <svg class="ml-auto flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00FF41" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+        </div>
+        <div class="px-6 py-4" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+          <div class="flex items-start gap-4">
+            <span class="font-black text-sm mt-0.5" style="color: #D4AF37; min-width: 20px;">02</span>
+            <div>
+              <div class="font-semibold text-white text-sm mb-0.5">Revenue Leakage Report — In Progress</div>
+              <div style="font-size: 12px; color: rgba(255,255,255,0.35);">Your personalized report is being compiled. Arrives within 24 hours.</div>
+            </div>
+            <div class="ml-auto flex-shrink-0 w-4 h-4 rounded-full mt-0.5" style="border: 2px solid rgba(212,175,55,0.4);"></div>
+          </div>
+        </div>
+        <div class="px-6 py-4">
+          <div class="flex items-start gap-4">
+            <span class="font-black text-sm mt-0.5" style="color: rgba(212,175,55,0.4); min-width: 20px;">03</span>
+            <div>
+              <div class="font-semibold text-sm mb-0.5" style="color: rgba(255,255,255,0.4);">Strategy Call — Pending</div>
+              <div style="font-size: 12px; color: rgba(255,255,255,0.25);">We'll reach out to schedule once your report is ready</div>
+            </div>
+            <div class="ml-auto flex-shrink-0 w-4 h-4 rounded-full mt-0.5" style="border: 2px solid rgba(255,255,255,0.1);"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <a href="/" class="inline-flex items-center gap-2 text-sm transition-colors"
+        style="color: rgba(255,255,255,0.3); letter-spacing: -0.01em;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back to Leverage Systems
+      </a>
+
+    </div>
+  </div>
+</Layout>
