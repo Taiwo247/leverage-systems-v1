@@ -51,10 +51,10 @@ export const POST: APIRoute = async ({ request }) => {
   const adSpendLabel  = AD_SPEND_LABELS[data.ad_spend]     || data.ad_spend     || 'Not specified';
   const submittedAt   = new Date().toISOString();
 
-  // ── 1. Forward to Make.com (fire-and-forget) ────────────────────────────
+  // ── 1. Forward to Make.com ───────────────────────────────────────────────
   const makeWebhook = import.meta.env.MAKE_AUDIT_WEBHOOK as string | undefined;
   if (makeWebhook) {
-    fetch(makeWebhook, {
+    await fetch(makeWebhook, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -69,7 +69,7 @@ export const POST: APIRoute = async ({ request }) => {
         source:        'Revenue Audit Form',
         submitted_at:  submittedAt,
       }),
-    }).catch(() => {});
+    }).catch(e => console.error('[submit-audit] make webhook error:', e));
   }
 
   // ── 2. Resend emails ─────────────────────────────────────────────────────
@@ -79,17 +79,16 @@ export const POST: APIRoute = async ({ request }) => {
 
   console.log('[submit-audit] resendKey present:', !!resendKey);
   console.log('[submit-audit] fromAddress:', fromAddress);
-  console.log('[submit-audit] ownerEmail:', ownerEmail);
 
   if (resendKey) {
     const resend = new Resend(resendKey);
 
-    // Lead confirmation email
-    resend.emails.send({
-      from: `LeverageSystems <${fromAddress}>`,
-      to:   email,
-      subject: 'Your Revenue Audit is Being Reviewed — LeverageSystems',
-      html: `
+    const [leadResult, ownerResult] = await Promise.allSettled([
+      resend.emails.send({
+        from: `LeverageSystems <${fromAddress}>`,
+        to:   email,
+        subject: 'Your Revenue Audit is Being Reviewed — LeverageSystems',
+        html: `
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
@@ -97,26 +96,17 @@ export const POST: APIRoute = async ({ request }) => {
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#0A0A0A;">
     <tr><td align="center" style="padding:40px 20px;">
       <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#111111;border:1px solid rgba(212,175,55,0.25);border-radius:4px;overflow:hidden;">
-
-        <!-- Gold top bar -->
         <tr><td height="2" style="background:linear-gradient(to right,transparent,#D4AF37,transparent);"></td></tr>
-
-        <!-- Header -->
         <tr><td style="padding:36px 36px 24px;border-bottom:1px solid rgba(255,255,255,0.06);">
           <p style="margin:0;font-size:11px;font-family:monospace;text-transform:uppercase;letter-spacing:0.12em;color:rgba(212,175,55,0.6);">LeverageSystems</p>
           <h1 style="margin:12px 0 0;font-size:24px;font-weight:900;letter-spacing:-0.03em;color:#ffffff;line-height:1.2;">Audit Received.<br/>The Machine is Moving.</h1>
         </td></tr>
-
-        <!-- Body -->
         <tr><td style="padding:28px 36px;">
           <p style="margin:0 0 16px;font-size:15px;color:rgba(255,255,255,0.6);line-height:1.7;">Hi ${name},</p>
           <p style="margin:0 0 24px;font-size:15px;color:rgba(255,255,255,0.6);line-height:1.7;">
             Your Revenue Audit has been received and our system is already analyzing your conversion architecture.
           </p>
-
-          <!-- What happens next -->
           <p style="margin:0 0 16px;font-size:11px;font-family:monospace;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);">What happens next</p>
-
           <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
             <tr><td style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
               <span style="color:#D4AF37;font-weight:700;font-size:13px;">01</span>
@@ -131,40 +121,33 @@ export const POST: APIRoute = async ({ request }) => {
               <span style="font-size:14px;color:rgba(255,255,255,0.7);margin-left:12px;">Strategy call to walk through your findings and build your infrastructure plan</span>
             </td></tr>
           </table>
-
           <p style="margin:0 0 28px;font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;">
             Questions before then? Reply directly to this email.
           </p>
-
-          <!-- CTA -->
           <table cellpadding="0" cellspacing="0"><tr><td style="background:#00FF41;border-radius:3px;">
             <a href="https://leveragesystems.ai/audit-status" style="display:inline-block;padding:14px 28px;font-size:14px;font-weight:800;color:#000000;text-decoration:none;letter-spacing:-0.01em;">
               View Your Audit Status →
             </a>
           </td></tr></table>
         </td></tr>
-
-        <!-- Footer -->
         <tr><td style="padding:20px 36px;border-top:1px solid rgba(255,255,255,0.06);">
           <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.2);font-family:monospace;">
             © ${new Date().getFullYear()} LeverageSystems. AI Sales Infrastructure.<br/>
             You submitted a Revenue Audit at leveragesystems.ai
           </p>
         </td></tr>
-
       </table>
     </td></tr>
   </table>
 </body>
 </html>`,
-    }).then(r => console.log('[submit-audit] lead email result:', JSON.stringify(r))).catch(e => console.error('[submit-audit] lead email error:', e));
+      }),
 
-    // Owner notification
-    resend.emails.send({
-      from: `LeverageSystems <${fromAddress}>`,
-      to:   ownerEmail,
-      subject: `New Revenue Audit — ${name} (${adSpendLabel})`,
-      html: `
+      resend.emails.send({
+        from: `LeverageSystems <${fromAddress}>`,
+        to:   ownerEmail,
+        subject: `New Revenue Audit — ${name} (${adSpendLabel})`,
+        html: `
 <html><body style="font-family:monospace;background:#0A0A0A;color:#fff;padding:24px;">
   <h2 style="color:#D4AF37;margin:0 0 20px;">New Revenue Audit Submission</h2>
   <table style="border-collapse:collapse;width:100%;">
@@ -179,7 +162,11 @@ export const POST: APIRoute = async ({ request }) => {
     <tr><td style="padding:8px 0;color:#888;">Submitted</td><td style="padding:8px 0;">${submittedAt}</td></tr>
   </table>
 </body></html>`,
-    }).catch(() => {});
+      }),
+    ]);
+
+    console.log('[submit-audit] lead email:', leadResult.status, leadResult.status === 'fulfilled' ? JSON.stringify(leadResult.value) : leadResult.reason);
+    console.log('[submit-audit] owner email:', ownerResult.status, ownerResult.status === 'fulfilled' ? JSON.stringify(ownerResult.value) : ownerResult.reason);
   }
 
   return json({ ok: true });
