@@ -77,6 +77,10 @@ export const POST: APIRoute = async ({ request }) => {
   const ownerEmail  = (import.meta.env.OWNER_EMAIL  as string | undefined) || 'taiwolanre247@gmail.com';
   const fromAddress = (import.meta.env.FROM_EMAIL   as string | undefined) || 'onboarding@resend.dev';
 
+  console.log('[submit-audit] resendKey present:', !!resendKey);
+  console.log('[submit-audit] fromAddress:', fromAddress);
+  console.log('[submit-audit] ownerEmail:', ownerEmail);
+
   if (resendKey) {
     const resend = new Resend(resendKey);
 
@@ -153,7 +157,7 @@ export const POST: APIRoute = async ({ request }) => {
   </table>
 </body>
 </html>`,
-    }).catch(() => {});
+    }).then(r => console.log('[submit-audit] lead email result:', JSON.stringify(r))).catch(e => console.error('[submit-audit] lead email error:', e));
 
     // Owner notification
     resend.emails.send({
