@@ -72,7 +72,21 @@ export const POST: APIRoute = async ({ request }) => {
     }).catch(e => console.error('[submit-audit] make webhook error:', e));
   }
 
-  // ── 2. Resend emails ─────────────────────────────────────────────────────
+  // ── 2. Trigger Leverage Engine recon pipeline (vision audit + PDF delivery) ──
+  const websiteUrl = data.website?.trim();
+  if (websiteUrl) {
+    fetch('https://leverageengine.vercel.app/api/recon', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        company_name: name,
+        url:          websiteUrl,
+        email,
+      }),
+    }).catch(e => console.error('[submit-audit] recon pipeline error:', e));
+  }
+
+  // ── 3. Resend emails ─────────────────────────────────────────────────────
   const resendKey   = import.meta.env.RESEND_API_KEY as string | undefined;
   const ownerEmail  = (import.meta.env.OWNER_EMAIL  as string | undefined) || 'taiwolanre247@gmail.com';
   const fromAddress = (import.meta.env.FROM_EMAIL   as string | undefined) || 'onboarding@resend.dev';
