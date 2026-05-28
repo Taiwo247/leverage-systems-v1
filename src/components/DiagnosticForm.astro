@@ -452,21 +452,25 @@ const steps = [
           <div class="text-[10px] text-[#00FF41]/50 font-mono uppercase tracking-widest mb-3">SYSTEM · AUDIT_INITIALIZED</div>
           <h3 class="text-2xl font-black text-white mb-2">Audit Initialized.</h3>
           <p class="text-white/50 text-base max-w-xs mx-auto leading-relaxed mb-1">
-            Check your inbox for your proprietary Revenue Leakage Report.
+            Your Revenue Leakage Report will be in your inbox within the next minute.
           </p>
           <p class="text-[#00FF41] font-bold text-base">Welcome to the Machine.</p>
           <div class="mt-7 inline-flex items-center gap-2 px-4 py-2 bg-[#00FF41]/10 border border-[#00FF41]/25 rounded-sm text-[#00FF41] text-xs font-mono">
             <span class="w-1.5 h-1.5 rounded-full bg-[#00FF41] animate-pulse-green"></span>
-            Report dispatched · ${email}
+            Report inbound · ${email}
           </div>
 
           <!-- Calendly booking block -->
-          <div class="mt-10 text-left">
-            <p class="text-center text-xs text-white/25 font-mono uppercase tracking-widest mb-5">While we build your brief — lock in your debrief call</p>
-            <div
-              class="calendly-inline-widget"
-              data-url="https://calendly.com/leveragesystems?background_color=0b0f19&text_color=ffffff&primary_color=10b981&hide_gdpr_banner=1"
-              style="min-width:280px;height:520px;border-radius:6px;overflow:hidden;">
+          <div class="mt-10">
+            <p class="text-center text-xs text-white/25 font-mono uppercase tracking-widest mb-5">Lock in your debrief call while you wait</p>
+            <div class="text-center">
+              <button
+                onclick="Calendly.initPopupWidget({url:'https://calendly.com/leveragesystems?background_color=0b0f19&text_color=ffffff&primary_color=10b981&hide_gdpr_banner=1'});return false;"
+                style="display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:#00FF41;color:#000000;font-weight:800;font-size:14px;letter-spacing:-0.01em;border:none;border-radius:3px;cursor:pointer;">
+                Lock In Your Strategy Debrief
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+              <p style="margin-top:10px;font-size:10px;color:rgba(255,255,255,0.2);font-family:monospace;letter-spacing:0.06em;">15 minutes · Free · No pitch</p>
             </div>
           </div>
         </div>

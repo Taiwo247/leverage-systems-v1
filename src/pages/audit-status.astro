@@ -4,11 +4,11 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout
   title="Audit Initialized — Leverage Systems"
-  description="Your Revenue Audit has been received. Our system is analyzing your conversion architecture."
+  description="Your Revenue Audit has been received. Elena Thorne is personally reviewing your conversion architecture."
+  loadCalendly={true}
 >
   <div class="min-h-screen bg-[#0A0A0A] flex items-center justify-center px-6 py-20">
 
-    <!-- Background glow -->
     <div class="absolute inset-0 pointer-events-none" aria-hidden="true"
       style="background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(212,175,55,0.06) 0%, transparent 70%);">
     </div>
@@ -27,7 +27,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full"
         style="border: 1px solid rgba(0,255,65,0.2); background: rgba(0,255,65,0.05);">
         <span class="w-1.5 h-1.5 rounded-full bg-[#00FF41] animate-pulse-green flex-shrink-0"></span>
-        <span style="font-size: 10px; font-family: monospace; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(0,255,65,0.7);">Audit Initialized</span>
+        <span id="status-label" style="font-size: 10px; font-family: monospace; text-transform: uppercase; letter-spacing: 0.16em; color: rgba(0,255,65,0.7);">Audit In Progress</span>
       </div>
 
       <!-- Headline -->
@@ -36,46 +36,95 @@ import Layout from '../layouts/Layout.astro';
         <span style="background: linear-gradient(135deg, #D4AF37 0%, #F5D06B 45%, #C9A227 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Moving.</span>
       </h1>
 
-      <!-- Divider -->
       <div class="mx-auto mb-6" style="height: 1px; max-width: 180px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.35), transparent);"></div>
 
-      <p class="mb-10 leading-relaxed" style="color: rgba(255,255,255,0.45); font-size: 1rem; max-width: 34rem; margin-left: auto; margin-right: auto;">
-        Your Revenue Audit has been received and is being processed. Expect your
-        <span style="color: rgba(255,255,255,0.8); font-weight: 600;">Revenue Leakage Report</span>
-        in your inbox within 24 hours.
+      <p id="status-description" class="mb-10 leading-relaxed" style="color: rgba(255,255,255,0.45); font-size: 1rem; max-width: 34rem; margin-left: auto; margin-right: auto;">
+        Your submission is being processed. Elena is reviewing your conversion architecture personally.
       </p>
 
       <!-- Steps -->
       <div class="text-left mb-10 rounded-sm overflow-hidden" style="border: 1px solid rgba(255,255,255,0.07); background: #111111;">
+
+        <!-- Step 01 -->
         <div class="px-6 py-4" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
           <div class="flex items-start gap-4">
             <span class="font-black text-sm mt-0.5" style="color: #D4AF37; min-width: 20px;">01</span>
-            <div>
-              <div class="font-semibold text-white text-sm mb-0.5">AI Analysis — Complete</div>
-              <div style="font-size: 12px; color: rgba(255,255,255,0.35);">Your business profile has been processed by our conversion intelligence system</div>
+            <div class="flex-1">
+              <div class="font-semibold text-white text-sm mb-0.5">Submission Received</div>
+              <div style="font-size: 12px; color: rgba(255,255,255,0.35);">Your business profile has been logged into our system</div>
             </div>
             <svg class="ml-auto flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00FF41" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
         </div>
+
+        <!-- Step 02 -->
         <div class="px-6 py-4" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
           <div class="flex items-start gap-4">
             <span class="font-black text-sm mt-0.5" style="color: #D4AF37; min-width: 20px;">02</span>
-            <div>
-              <div class="font-semibold text-white text-sm mb-0.5">Revenue Leakage Report — In Progress</div>
-              <div style="font-size: 12px; color: rgba(255,255,255,0.35);">Your personalized report is being compiled. Arrives within 24 hours.</div>
+            <div class="flex-1">
+              <div id="step2-title" class="font-semibold text-white text-sm mb-0.5">Revenue Architecture Scan — Running</div>
+              <div id="step2-sub" style="font-size: 12px; color: rgba(255,255,255,0.35);">Elena's team is scanning your site infrastructure and ad tracking setup</div>
             </div>
-            <div class="ml-auto flex-shrink-0 w-4 h-4 rounded-full mt-0.5" style="border: 2px solid rgba(212,175,55,0.4);"></div>
+            <div id="step2-icon" class="ml-auto flex-shrink-0 mt-0.5">
+              <div class="w-4 h-4 rounded-full border-2 border-[#00FF41] flex items-center justify-center">
+                <div class="w-1.5 h-1.5 rounded-full bg-[#00FF41] animate-pulse"></div>
+              </div>
+            </div>
           </div>
         </div>
+
+        <!-- Step 03 -->
+        <div class="px-6 py-4" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+          <div class="flex items-start gap-4">
+            <span id="step3-num" class="font-black text-sm mt-0.5" style="color: rgba(212,175,55,0.35); min-width: 20px;">03</span>
+            <div class="flex-1">
+              <div id="step3-title" class="font-semibold text-sm mb-0.5" style="color: rgba(255,255,255,0.35);">Revenue Leakage Report — Pending</div>
+              <div id="step3-sub" style="font-size: 12px; color: rgba(255,255,255,0.2);">Elena will compile your findings and calculate exact dollar exposure</div>
+            </div>
+            <div id="step3-icon" class="ml-auto flex-shrink-0 mt-0.5 w-4 h-4 rounded-full" style="border: 2px solid rgba(255,255,255,0.1);"></div>
+          </div>
+        </div>
+
+        <!-- Step 04 -->
         <div class="px-6 py-4">
           <div class="flex items-start gap-4">
-            <span class="font-black text-sm mt-0.5" style="color: rgba(212,175,55,0.4); min-width: 20px;">03</span>
-            <div>
-              <div class="font-semibold text-sm mb-0.5" style="color: rgba(255,255,255,0.4);">Strategy Call — Pending</div>
-              <div style="font-size: 12px; color: rgba(255,255,255,0.25);">We'll reach out to schedule once your report is ready</div>
+            <span id="step4-num" class="font-black text-sm mt-0.5" style="color: rgba(212,175,55,0.25); min-width: 20px;">04</span>
+            <div class="flex-1">
+              <div id="step4-title" class="font-semibold text-sm mb-0.5" style="color: rgba(255,255,255,0.25);">Strategy Debrief — Pending</div>
+              <div id="step4-sub" style="font-size: 12px; color: rgba(255,255,255,0.15);">15-minute call with Elena to walk through your report and build your infrastructure plan</div>
             </div>
-            <div class="ml-auto flex-shrink-0 w-4 h-4 rounded-full mt-0.5" style="border: 2px solid rgba(255,255,255,0.1);"></div>
+            <div id="step4-icon" class="ml-auto flex-shrink-0 mt-0.5 w-4 h-4 rounded-full" style="border: 2px solid rgba(255,255,255,0.07);"></div>
           </div>
+        </div>
+
+      </div>
+
+      <!-- Analyst card -->
+      <div id="analyst-card" class="mb-8 px-5 py-4 rounded-sm text-left" style="background: #111; border: 1px solid rgba(212,175,55,0.15);">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center font-black text-sm flex-shrink-0"
+            style="background: linear-gradient(135deg, #D4AF37, #C9A227); color: #0A0A0A;">E</div>
+          <div>
+            <div class="text-white font-semibold text-sm">Elena Thorne</div>
+            <div style="font-size: 11px; color: rgba(255,255,255,0.3);">Chief Revenue Forensics Officer, Leverage Systems</div>
+          </div>
+          <div class="ml-auto flex items-center gap-1.5 flex-shrink-0">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#00FF41] animate-pulse-green"></span>
+            <span id="analyst-status" style="font-size: 10px; color: rgba(0,255,65,0.7); font-family: monospace;">Reviewing now</span>
+          </div>
+        </div>
+        <p id="analyst-message" class="mt-3 text-sm leading-relaxed" style="color: rgba(255,255,255,0.4);">
+          I personally review every audit submission before we compile the report. Expect your briefing in your inbox shortly.
+        </p>
+      </div>
+
+      <!-- Calendly — always visible immediately -->
+      <div class="mb-8 px-5 py-5 rounded-sm text-left" style="background: #111; border: 1px solid rgba(0,255,65,0.12);">
+        <p class="text-center mb-4" style="font-size: 11px; color: rgba(255,255,255,0.3); font-family: monospace; text-transform: uppercase; letter-spacing: 0.1em;">While we build your brief — lock in your debrief call</p>
+        <div
+          class="calendly-inline-widget"
+          data-url="https://calendly.com/leveragesystems?background_color=0b0f19&text_color=ffffff&primary_color=10b981&hide_gdpr_banner=1"
+          style="min-width:280px;height:520px;border-radius:6px;overflow:hidden;">
         </div>
       </div>
 
@@ -89,3 +138,78 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </div>
 </Layout>
+
+<script>
+  const params  = new URLSearchParams(window.location.search);
+  const t       = parseInt(params.get('t') || '0', 10);
+  const elapsed = t ? Math.floor((Date.now() - t) / 1000) : 999; // seconds since submit
+
+  function setComplete(iconId: string, titleId: string, numId: string) {
+    const icon  = document.getElementById(iconId);
+    const title = document.getElementById(titleId);
+    const num   = document.getElementById(numId);
+    if (icon)  icon.innerHTML  = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00FF41" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
+    if (title) title.style.color = '#fff';
+    if (num)   num.style.color   = '#D4AF37';
+  }
+
+  function setActive(iconId: string, titleId: string, subId: string, numId: string, titleText: string, subText: string) {
+    const icon  = document.getElementById(iconId);
+    const title = document.getElementById(titleId);
+    const sub   = document.getElementById(subId);
+    const num   = document.getElementById(numId);
+    if (icon)  icon.innerHTML  = `<div class="w-4 h-4 rounded-full border-2 border-[#00FF41] flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-[#00FF41] animate-pulse"></div></div>`;
+    if (title) { title.textContent = titleText; title.style.color = '#fff'; }
+    if (sub)   sub.textContent = subText;
+    if (num)   num.style.color = '#D4AF37';
+  }
+
+  // Stage 1: 0–60s — scan running
+  if (elapsed < 60) {
+    document.getElementById('status-label')!.textContent       = 'Scan In Progress';
+    document.getElementById('status-description')!.textContent = 'Elena\'s team has your submission and is running a live architecture scan on your domain right now.';
+    document.getElementById('analyst-status')!.textContent     = 'Scanning now';
+    document.getElementById('analyst-message')!.textContent    = 'We run a live technical pass on your site — tracking infrastructure, page speed telemetry, and conversion architecture. The system is fast. Your briefing will be in your inbox shortly.';
+
+  // Stage 2: 60–120s — scan done, report assembling
+  } else if (elapsed < 120) {
+    setComplete('step2-icon', 'step2-title', '02');
+    document.getElementById('step2-title')!.textContent = 'Revenue Architecture Scan — Complete';
+    document.getElementById('step2-sub')!.textContent   = 'Site infrastructure and conversion gaps identified';
+    setActive('step3-icon', 'step3-title', 'step3-sub', 'step3-num',
+      'Revenue Leakage Report — Assembling',
+      'Compiling findings and calculating your exact dollar exposure');
+    document.getElementById('status-label')!.textContent       = 'Report Assembling';
+    document.getElementById('status-description')!.textContent = 'The scan is complete. Your Revenue Leakage Report is being assembled — check your inbox, it\'s on its way.';
+    document.getElementById('analyst-status')!.textContent     = 'Compiling report';
+    document.getElementById('analyst-message')!.textContent    = 'The technical scan is done. Your briefing document is being compiled right now — it will hit your inbox any second.';
+
+  // Stage 3: 2–5min — report sent, book call
+  } else if (elapsed < 300) {
+    setComplete('step2-icon', 'step2-title', '02');
+    document.getElementById('step2-title')!.textContent = 'Revenue Architecture Scan — Complete';
+    setComplete('step3-icon', 'step3-title', 'step3-num');
+    document.getElementById('step3-title')!.textContent = 'Revenue Leakage Report — Dispatched';
+    document.getElementById('step3-sub')!.textContent   = 'Check your inbox — your briefing has been sent';
+    setActive('step4-icon', 'step4-title', 'step4-sub', 'step4-num',
+      'Strategy Debrief — Ready to Book',
+      'Book your 15-minute call with Elena to walk through your findings');
+    document.getElementById('status-label')!.textContent       = 'Report Dispatched';
+    document.getElementById('status-description')!.textContent = 'Your Revenue Leakage Report has been sent. Check your inbox — then book your debrief call with Elena below.';
+    document.getElementById('analyst-status')!.textContent     = 'Available for debrief';
+    document.getElementById('analyst-message')!.textContent    = 'Your report is in your inbox. The next step is a 15-minute call so I can walk you through the findings and tell you exactly what needs to be rebuilt first.';
+
+  // Stage 4: 5min+ — all done
+  } else {
+    setComplete('step2-icon', 'step2-title', '02');
+    document.getElementById('step2-title')!.textContent = 'Revenue Architecture Scan — Complete';
+    setComplete('step3-icon', 'step3-title', 'step3-num');
+    document.getElementById('step3-title')!.textContent = 'Revenue Leakage Report — Sent';
+    setComplete('step4-icon', 'step4-title', 'step4-num');
+    document.getElementById('step4-title')!.textContent = 'Strategy Debrief — Book Now';
+    document.getElementById('status-label')!.textContent       = 'Report Delivered';
+    document.getElementById('status-description')!.textContent = 'Your full Revenue Leakage Report is in your inbox. The final step is booking your strategy debrief with Elena.';
+    document.getElementById('analyst-status')!.textContent     = 'Ready for your call';
+    document.getElementById('analyst-message')!.textContent    = 'Everything is in your inbox. Book the call below — it\'s 15 minutes, no pitch, just your numbers and what we fix first.';
+  }
+</script>
