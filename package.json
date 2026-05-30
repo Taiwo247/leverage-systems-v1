@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.92.0",
+    "@astrojs/sitemap": "^3.7.2",
     "@astrojs/vercel": "^10.0.6",
     "astro": "^6.1.10",
     "lucide": "^1.14.0",

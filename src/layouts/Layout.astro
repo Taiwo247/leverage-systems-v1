@@ -4,11 +4,15 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  canonical?: string;
+  loadCalendly?: boolean;
 }
 
 const {
   title = 'Leverage Systems — AI Sales Infrastructure',
   description = 'We install AI Sales Infrastructure that engages, qualifies, and books every lead in <30 seconds. Stop burning ad spend. Start extracting revenue.',
+  canonical = '',
+  loadCalendly = false,
 } = Astro.props;
 ---
 
@@ -20,6 +24,8 @@ const {
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="google-site-verification" content="grwGbVJfCxHNei_utgHKzKlfyVtc3OR5uUJ9J1yePkE" />
+    {canonical && <link rel="canonical" href={canonical} />}
 
     <!-- Preconnect for Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,9 +42,9 @@ const {
 
     <title>{title}</title>
 
-    <!-- Calendly widget script (pre-loaded for instant embed on form success) -->
-    <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <!-- Calendly — only loaded on pages with booking widgets -->
+    {loadCalendly && <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />}
+    {loadCalendly && <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>}
 
     <script type="application/ld+json">
     {
