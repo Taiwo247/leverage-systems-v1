@@ -29,7 +29,7 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     // Screenshot via thum.io (same service used by the main recon pipeline)
     const screenshotUrl =
-      `https://image.thum.io/get/width/1280/crop/800/noanimate/${encodeURIComponent(url)}`;
+      `https://image.thum.io/get/width/1280/crop/800/noanimate/${url}`;
     const imgResp = await fetch(screenshotUrl, { signal: AbortSignal.timeout(14000) });
     if (!imgResp.ok) throw new Error(`thum.io ${imgResp.status}`);
 
