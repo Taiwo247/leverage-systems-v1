@@ -102,18 +102,18 @@
     </div>
 
     <!-- Metrics row -->
-    <div class="grid grid-cols-3 gap-px max-w-lg mx-auto rounded-sm overflow-hidden animate-fade-up delay-500" style="background: rgba(255,255,255,0.04);">
-      <div class="px-4 py-5 text-center" style="background: #0F0F0F;">
-        <div class="font-black text-[#00FF41] tabular-nums" style="font-size: clamp(1.5rem, 3.5vw, 2.2rem); letter-spacing: -0.03em;">18s</div>
-        <div style="font-size: 9px; color: rgba(255,255,255,0.3); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">Avg. Response</div>
+    <div id="hero-metrics" class="grid grid-cols-3 gap-px max-w-lg mx-auto rounded-sm overflow-hidden animate-fade-up delay-500" style="background: rgba(255,255,255,0.04);">
+      <div class="hero-metric-cell px-4 py-5 text-center" style="background: #0F0F0F;">
+        <div class="font-black text-[#00FF41] tabular-nums" style="font-size: clamp(1.3rem, 5vw, 2.2rem); letter-spacing: -0.03em;">18s</div>
+        <div class="hero-metric-label" style="font-size: 9px; color: rgba(255,255,255,0.3); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">Avg. Response</div>
       </div>
-      <div class="px-4 py-5 text-center" style="background: #0F0F0F;">
-        <div class="font-black text-white tabular-nums" style="font-size: clamp(1.5rem, 3.5vw, 2.2rem); letter-spacing: -0.03em;">340%</div>
-        <div style="font-size: 9px; color: rgba(255,255,255,0.3); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">ROI / 90 Days</div>
+      <div class="hero-metric-cell px-4 py-5 text-center" style="background: #0F0F0F;">
+        <div class="font-black text-white tabular-nums" style="font-size: clamp(1.3rem, 5vw, 2.2rem); letter-spacing: -0.03em;">340%</div>
+        <div class="hero-metric-label" style="font-size: 9px; color: rgba(255,255,255,0.3); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">ROI / 90 Days</div>
       </div>
-      <div class="px-4 py-5 text-center" style="background: #0F0F0F;">
-        <div class="font-black text-white tabular-nums" style="font-size: clamp(1.5rem, 3.5vw, 2.2rem); letter-spacing: -0.03em;">24/7</div>
-        <div style="font-size: 9px; color: rgba(255,255,255,0.3); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">Always On</div>
+      <div class="hero-metric-cell px-4 py-5 text-center" style="background: #0F0F0F;">
+        <div class="font-black text-white tabular-nums" style="font-size: clamp(1.3rem, 5vw, 2.2rem); letter-spacing: -0.03em;">24/7</div>
+        <div class="hero-metric-label" style="font-size: 9px; color: rgba(255,255,255,0.3); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">Always On</div>
       </div>
     </div>
 
@@ -132,6 +132,31 @@
       window.location.href = '/score?url=' + encodeURIComponent(url);
     });
   </script>
+
+  <style>
+    /* Stack form vertically on small screens */
+    @media (max-width: 520px) {
+      #hero-score-form {
+        flex-direction: column !important;
+      }
+      #hero-score-form button[type="submit"] {
+        width: 100%;
+        padding: 14px 16px !important;
+        font-size: 0.95rem !important;
+      }
+    }
+
+    /* Tighter metric cells on small screens */
+    @media (max-width: 420px) {
+      .hero-metric-cell {
+        padding: 12px 6px !important;
+      }
+      .hero-metric-label {
+        font-size: 8px !important;
+        letter-spacing: 0.05em !important;
+      }
+    }
+  </style>
 
   <!-- Ticker tape — in normal flow, zero overlap possible -->
   <div style="border-top: 1px solid rgba(255,255,255,0.04); padding: 12px 0; overflow: hidden; background: rgba(10,10,10,0.9);">
