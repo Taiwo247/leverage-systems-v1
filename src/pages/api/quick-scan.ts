@@ -35,6 +35,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const imgBuffer = await imgResp.arrayBuffer();
     const base64    = Buffer.from(imgBuffer).toString('base64');
+    const mimeType  = (imgResp.headers.get('content-type') || 'image/png').split(';')[0].trim() as 'image/jpeg' | 'image/png' | 'image/gif' | 'image/webp';
 
     const client = new Anthropic({
       apiKey: import.meta.env.ANTHROPIC_API_KEY as string,
@@ -51,7 +52,7 @@ export const POST: APIRoute = async ({ request }) => {
         content: [
           {
             type: 'image',
-            source: { type: 'base64', media_type: 'image/jpeg', data: base64 },
+            source: { type: 'base64', media_type: mimeType, data: base64 },
           },
           {
             type: 'text',
