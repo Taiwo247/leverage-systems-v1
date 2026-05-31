@@ -626,6 +626,22 @@ import Footer from '../components/Footer.astro';
     btn.disabled = true;
     errEl.style.display = 'none';
 
+    // Check session cache first — same URL in same session shows consistent score
+    const cacheKey = 'ls_scan_' + url;
+    const cached = sessionStorage.getItem(cacheKey);
+    if (cached) {
+      try {
+        const data = JSON.parse(cached);
+        document.getElementById('results-domain')!.textContent =
+          `DOMAIN: ${(data.domain || capturedDomain).toUpperCase()}`;
+        setScore(data.score);
+        setFindings(data.findings || []);
+        show('state-results');
+        btn.disabled = false;
+        return;
+      } catch {}
+    }
+
     // Show scanning state
     const domainLabel = document.getElementById('scan-domain-label')!;
     domainLabel.textContent = `SCANNING: ${capturedDomain.toUpperCase()}`;
@@ -645,6 +661,11 @@ import Footer from '../components/Footer.astro';
       const data = await res.json();
 
       if (!data.ok) throw new Error(data.error || 'Scan failed');
+
+      // Cache result for this session
+      sessionStorage.setItem(cacheKey, JSON.stringify({
+        score: data.score, findings: data.findings, domain: data.domain,
+      }));
 
       // Populate results
       document.getElementById('results-domain')!.textContent =
