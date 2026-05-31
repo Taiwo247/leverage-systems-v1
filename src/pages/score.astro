@@ -663,6 +663,20 @@ import Footer from '../components/Footer.astro';
     }
   });
 
+  // ── Auto-run from ?url= param ─────────────────────────────────────────────
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const preUrl = params.get('url');
+    if (preUrl) {
+      const input = document.getElementById('url-input') as HTMLInputElement;
+      if (input) {
+        input.value = preUrl;
+        (document.getElementById('url-form') as HTMLFormElement)
+          .dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+      }
+    }
+  })();
+
   // ── Email form ────────────────────────────────────────────────────────────
   document.getElementById('email-form')!.addEventListener('submit', async e => {
     e.preventDefault();
