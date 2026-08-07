@@ -388,6 +388,17 @@ const steps = [
     // Fire webhook immediately — do NOT await, do NOT block the animation
     pushToZapier({ ...answers });
 
+    // Meta Pixel — fire the Lead conversion event so ad campaigns optimize for
+    // real audit submissions, not just clicks. Guarded in case fbq isn't loaded.
+    try {
+      if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
+        window.fbq('track', 'Lead', {
+          content_name: 'Revenue Audit',
+          content_category: answers[1] || '',
+        });
+      }
+    } catch (_) { /* never break the UX */ }
+
     const email = answers.email || '';
 
     document.getElementById('form-steps').innerHTML = `
@@ -465,7 +476,7 @@ const steps = [
             <p class="text-center text-xs text-white/25 font-mono uppercase tracking-widest mb-5">Lock in your debrief call while you wait</p>
             <div class="text-center">
               <button
-                onclick="Calendly.initPopupWidget({url:'https://calendly.com/leveragesystems?background_color=0b0f19&text_color=ffffff&primary_color=10b981&hide_gdpr_banner=1'});return false;"
+                onclick="Calendly.initPopupWidget({url:'https://calendly.com/evyn-leverage/20min?background_color=0b0f19&text_color=ffffff&primary_color=10b981&hide_gdpr_banner=1'});return false;"
                 style="display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:#00FF41;color:#000000;font-weight:800;font-size:14px;letter-spacing:-0.01em;border:none;border-radius:3px;cursor:pointer;">
                 Lock In Your Strategy Debrief
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg>

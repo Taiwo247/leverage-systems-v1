@@ -172,6 +172,28 @@ export const POST: APIRoute = async ({ request }) => {
     console.log('[submit-audit] lead email:', leadResult.status, leadResult.status === 'fulfilled' ? JSON.stringify(leadResult.value) : leadResult.reason);
     console.log('[submit-audit] owner email:', ownerResult.status, ownerResult.status === 'fulfilled' ? JSON.stringify(ownerResult.value) : ownerResult.reason);
 
+    // ── Airtable logging ─────────────────────────────────────────────────────
+    const atKey   = import.meta.env.AIRTABLE_API_KEY        as string | undefined;
+    const atBase  = import.meta.env.AIRTABLE_BASE_ID        as string | undefined;
+    const atTable = import.meta.env.AIRTABLE_EXIT_TABLE_ID  as string | undefined;
+    if (atKey && atBase && atTable) {
+      fetch(`https://api.airtable.com/v0/${atBase}/${atTable}`, {
+        method:  'POST',
+        headers: { 'Authorization': `Bearer ${atKey}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fields: {
+            'Email':         email,
+            'Name':          name,
+            'Website':       data.website    || '',
+            'Business Type': businessLabel,
+            'Ad Spend':      adSpendLabel,
+            'Date Captured': submittedAt,
+            'Status':        'Audit Form Lead',
+          },
+        }),
+      }).catch(e => console.error('[submit-audit] airtable error:', e));
+    }
+
     // ── 3. Trigger recon pipeline AFTER confirmation emails are queued ───────
     // Await with 4s abort: ensures the request body is delivered to the recon
     // serverless function. Once received, recon runs independently — the abort
@@ -201,7 +223,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     // ── Follow-up sequence (fire-and-forget) ────────────────────────────────
     const auditStatusUrl = `https://leveragesystems.ai/audit-status?t=${Date.now()}`;
-    const bookingUrl     = 'https://calendly.com/leveragesystems';
+    const bookingUrl     = 'https://calendly.com/evyn-leverage/20min';
 
     resend.emails.send({
       from:        `Elena Thorne — LeverageSystems <${fromAddress}>`,

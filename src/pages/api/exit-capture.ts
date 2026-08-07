@@ -12,7 +12,7 @@ function json(body: object, status = 200) {
   });
 }
 
-const BOOKING_URL = 'https://calendly.com/leveragesystems';
+const BOOKING_URL = 'https://calendly.com/evyn-leverage/20min';
 const AUDIT_URL   = 'https://leveragesystems.ai/#audit';
 
 const CHECKLIST_HTML = `<!DOCTYPE html>
