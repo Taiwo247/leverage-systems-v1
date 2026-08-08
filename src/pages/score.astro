@@ -719,6 +719,13 @@ import Footer from '../components/Footer.astro';
       });
       const data = await res.json();
       if (!data.ok) throw new Error(data.error || 'Submission failed');
+      // Meta Pixel — fire Lead on successful email capture so ad campaigns
+      // optimize for real conversions (audit requests), not just clicks.
+      try {
+        if (typeof (window as any).fbq === 'function') {
+          (window as any).fbq('track', 'Lead', { content_name: 'Revenue Score' });
+        }
+      } catch {}
       show('state-submitted');
     } catch (err: any) {
       btn.disabled    = false;
