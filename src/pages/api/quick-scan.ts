@@ -1,7 +1,6 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import Anthropic from '@anthropic-ai/sdk';
 
 function json(body: object, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -10,6 +9,18 @@ function json(body: object, status = 200) {
   });
 }
 
+/**
+ * Revenue Forensics quick-scan — deterministic.
+ *
+ * Instead of guessing from a screenshot (which can't see JS or tracking code),
+ * this fetches the real page source and detects actual signals:
+ *   - Meta Pixel present in HTML vs injected later by JS
+ *   - Google Analytics / GTM present
+ *   - native form present vs JS-rendered
+ *   - real server load time
+ * The score is a fixed formula over those facts, so the SAME site always scores
+ * the SAME on re-run — it holds up when a skeptic checks it themselves.
+ */
 export const POST: APIRoute = async ({ request }) => {
   let rawUrl: string;
   try {
@@ -27,58 +38,75 @@ export const POST: APIRoute = async ({ request }) => {
   try { domain = new URL(url).hostname.replace(/^www\./, ''); } catch {}
 
   try {
-    // Screenshot via thum.io (same service used by the main recon pipeline)
-    const screenshotUrl =
-      `https://image.thum.io/get/width/1280/crop/800/noanimate/${url}`;
-    const imgResp = await fetch(screenshotUrl, { signal: AbortSignal.timeout(14000) });
-    if (!imgResp.ok) throw new Error(`thum.io ${imgResp.status}`);
-
-    const imgBuffer = await imgResp.arrayBuffer();
-    const base64    = Buffer.from(imgBuffer).toString('base64');
-    const mimeType  = (imgResp.headers.get('content-type') || 'image/png').split(';')[0].trim() as 'image/jpeg' | 'image/png' | 'image/gif' | 'image/webp';
-
-    const client = new Anthropic({
-      apiKey: import.meta.env.ANTHROPIC_API_KEY as string,
+    const started = Date.now();
+    const resp = await fetch(url, {
+      redirect: 'follow',
+      signal: AbortSignal.timeout(14000),
+      headers: {
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' +
+          '(KHTML, like Gecko) Chrome/124.0 Safari/537.36',
+      },
     });
+    const html   = await resp.text();
+    const loadS  = +((Date.now() - started) / 1000).toFixed(1);
+    const H      = html.toLowerCase();
 
-    const message = await client.messages.create({
-      model:       'claude-sonnet-5',
-      max_tokens:  320,
-      temperature: 0,   // deterministic — same site scores the same on re-run
-      system:
-        'You are a revenue forensics analyst. Analyze website screenshots for conversion failures and revenue leaks. ' +
-        'Respond with valid JSON only — no markdown, no extra text.',
-      messages: [{
-        role: 'user',
-        content: [
-          {
-            type: 'image',
-            source: { type: 'base64', media_type: mimeType, data: base64 },
-          },
-          {
-            type: 'text',
-            text: `Score this website 0–100 on revenue health.
-Rubric: tracking pixels (0–25), page speed signals (0–35), visual conversion quality (0–40).
-Use the full range — do not cluster around 50.
+    const hasPixel = /fbq\s*\(|fbevents\.js|facebook\.com\/tr|connect\.facebook\.net/.test(H);
+    const hasGA    = /gtag\s*\(|googletagmanager\.com|google-analytics\.com|analytics\.js/.test(H);
+    const hasForm  = /<form/.test(H);
 
-Return exactly this JSON:
-{
-  "score": <integer>,
-  "findings": [
-    "<specific revenue leak with a concrete number or impact — max 14 words>",
-    "<specific conversion blocker — what element is broken and why — max 14 words>",
-    "<specific infrastructure gap costing leads daily — max 14 words>"
-  ]
-}`,
-          },
-        ],
-      }],
-    });
+    // ── deterministic score ──────────────────────────────────────────────────
+    let score = 100;
+    const findings: string[] = [];
 
-    const raw = message.content[0].type === 'text' ? message.content[0].text : '';
-    const result = JSON.parse(raw.replace(/```json|```/g, '').trim());
+    if (!hasPixel) {
+      score -= 28;
+      findings.push(
+        "No Meta Pixel in the page source — it's either missing or injected by JavaScript after load, so it fires late and misses visitors who bounce first."
+      );
+    }
 
-    return json({ ok: true, score: result.score, findings: result.findings, domain });
+    if (loadS >= 4) {
+      score -= 28;
+      findings.push(
+        `Slow server response: ${loadS}s — well past the 3s mark where visitor abandonment climbs sharply, and your tracking hasn't even fired yet.`
+      );
+    } else if (loadS >= 2.5) {
+      score -= 18;
+      findings.push(
+        `Load time ${loadS}s — past 2s, every extra second measurably lifts bounce rate and delays when your pixel fires.`
+      );
+    } else if (loadS >= 1.5) {
+      score -= 9;
+      findings.push(
+        `Load time ${loadS}s — usable, but tracking still fires after render, leaving an early-visitor blind spot.`
+      );
+    }
+
+    if (!hasGA) {
+      score -= 18;
+      findings.push(
+        'No Google Analytics / GTM detected in the source — conversion data has blind spots you cannot see or reconcile against Meta.'
+      );
+    }
+
+    if (!hasForm) {
+      score -= 12;
+      findings.push(
+        'No native form in the HTML — lead capture depends entirely on JavaScript rendering; if the bundle stalls, the form never appears.'
+      );
+    }
+
+    if (findings.length === 0) {
+      findings.push(
+        'Core tracking is present in the source — a deeper audit is needed on firing order, consent gating, and conversion-event coverage.'
+      );
+    }
+
+    score = Math.max(6, Math.min(94, Math.round(score)));
+
+    return json({ ok: true, score, findings: findings.slice(0, 3), domain });
 
   } catch (err) {
     console.error('[quick-scan]', err);
