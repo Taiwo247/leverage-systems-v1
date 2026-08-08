@@ -42,7 +42,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     const message = await client.messages.create({
-      model:      'claude-sonnet-4-6',
+      model:      'claude-sonnet-5',
       max_tokens: 320,
       system:
         'You are a revenue forensics analyst. Analyze website screenshots for conversion failures and revenue leaks. ' +
