@@ -42,8 +42,9 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     const message = await client.messages.create({
-      model:      'claude-sonnet-5',
-      max_tokens: 320,
+      model:       'claude-sonnet-5',
+      max_tokens:  320,
+      temperature: 0,   // deterministic — same site scores the same on re-run
       system:
         'You are a revenue forensics analyst. Analyze website screenshots for conversion failures and revenue leaks. ' +
         'Respond with valid JSON only — no markdown, no extra text.',
